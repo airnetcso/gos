@@ -23,6 +23,7 @@
                   url('https://images.unsplash.com/photo-1517147196916-a5181716c514?q=80&w=2000') center/cover no-repeat;
     }
 
+    /* Efek Card Paket */
     .card-premium { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: white; }
     .card-premium:hover { transform: translateY(-12px) scale(1.02); filter: brightness(1.05); box-shadow: 0 25px 50px -12px rgba(30, 41, 59, 0.15); }
 
@@ -61,11 +62,9 @@
         </div>
       </div>
 
-      <!-- Menu Desktop -->
+      <!-- Menu Desktop (Hanya Program & Member Area) -->
       <div class="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-600">
         <a href="#program" class="hover:text-amber-600 transition-colors">Program</a>
-        <a href="#keunggulan" class="hover:text-amber-600 transition-colors">Keunggulan</a>
-        <a href="#testimoni" class="hover:text-amber-600 transition-colors">Testimoni</a>
         <a href="member.html" class="px-5 py-2 bg-slate-100 rounded-xl hover:bg-navy hover:text-white transition-all">Member Area</a>
         <a href="daftar.html" class="bg-navy text-white px-6 py-3 rounded-xl font-black transition-all shadow-md">Daftar</a>
       </div>
@@ -77,22 +76,46 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu Sidebar Overlay -->
+  <!-- Mobile Menu Sidebar Overlay (Hanya Program & Member Area) -->
   <div id="mobile-menu" class="fixed inset-y-0 right-0 w-64 bg-navy z-[110] p-10 flex flex-col gap-6 shadow-2xl md:hidden">
     <button onclick="toggleMobileMenu()" class="text-white text-right text-2xl"><i class="fas fa-times"></i></button>
     <a href="#program" onclick="toggleMobileMenu()" class="text-white font-black uppercase tracking-widest text-sm">Program</a>
-    <a href="#keunggulan" onclick="toggleMobileMenu()" class="text-white font-black uppercase tracking-widest text-sm">Keunggulan</a>
-    <a href="#testimoni" onclick="toggleMobileMenu()" class="text-white font-black uppercase tracking-widest text-sm">Testimoni</a>
     <a href="member.html" class="text-amber-500 font-black uppercase tracking-widest text-sm border-t border-white/10 pt-6">Member Area</a>
     <a href="daftar.html" class="bg-amber-600 text-white text-center py-4 rounded-xl font-black uppercase tracking-widest text-xs mt-4">Daftar</a>
   </div>
 
   <!-- Hero Section -->
   <section class="hero-gradient pt-48 pb-32 text-white px-6 text-center">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto text-center">
       <h1 class="text-4xl md:text-7xl font-black mb-8 uppercase tracking-tighter">Wujudkan Karir Di <span class="text-amber-500">Korea Selatan</span></h1>
       <p class="text-md md:text-lg text-slate-300 mb-12 max-w-2xl mx-auto uppercase tracking-widest font-bold">Bimbingan EPS-TOPIK Profesional Terakreditasi</p>
       <a href="daftar.html" class="bg-amber-600 text-white px-10 md:px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl">Mulai Belajar</a>
+    </div>
+  </section>
+
+  <!-- Section Keunggulan (ISI TETAP ADA) -->
+  <section id="keunggulan" class="py-20 bg-white px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
+        <div class="text-4xl mb-4">🏆</div>
+        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Lulusan Terbanyak</h4>
+        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Terbukti memberangkatkan ribuan siswa.</p>
+      </div>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
+        <div class="text-4xl mb-4">👨‍🏫</div>
+        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Master Pengajar</h4>
+        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Dibimbing praktisi & alumni Korea.</p>
+      </div>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
+        <div class="text-4xl mb-4">📖</div>
+        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Materi Update</h4>
+        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Sesuai standar EPS-TOPIK terbaru.</p>
+      </div>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
+        <div class="text-4xl mb-4">💬</div>
+        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Konsultasi GToG</h4>
+        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Gratis bimbingan pendaftaran.</p>
+      </div>
     </div>
   </section>
 
@@ -101,28 +124,24 @@
     <div class="max-w-7xl mx-auto text-center">
       <h2 class="text-3xl md:text-5xl font-black text-navy uppercase mb-16 italic">Paket Belajar</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Paket Video -->
         <div class="card-premium card-dasar p-8 rounded-modern flex flex-col text-left">
           <div class="text-3xl mb-4 text-blue-600"><i class="fas fa-video"></i></div>
           <h3 class="font-black uppercase text-lg mb-2 text-navy">Online Video</h3>
           <p class="text-2xl font-black text-navy mb-8">Rp 2.000.000</p>
           <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase">Pilih Paket</a>
         </div>
-        <!-- Paket Live -->
         <div class="card-premium card-lanjutan p-8 rounded-modern flex flex-col text-left">
           <div class="text-3xl mb-4 text-purple-600"><i class="fas fa-bolt"></i></div>
           <h3 class="font-black uppercase text-lg mb-2 text-navy">Online Live</h3>
           <p class="text-2xl font-black text-navy mb-8">Rp 3.000.000</p>
           <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase shadow-lg">Pilih Paket</a>
         </div>
-        <!-- Offline -->
         <div class="card-premium card-advance p-8 rounded-modern flex flex-col text-left">
           <div class="text-3xl mb-4 text-rose-600"><i class="fas fa-school"></i></div>
           <h3 class="font-black uppercase text-lg mb-2 text-navy">Offline</h3>
           <p class="text-2xl font-black text-navy mb-8">Rp 6.000.000</p>
           <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase">Pilih Paket</a>
         </div>
-        <!-- Karyawan -->
         <div class="card-premium card-karyawan p-8 rounded-modern flex flex-col text-left">
           <div class="text-3xl mb-4 text-emerald-600"><i class="fas fa-briefcase"></i></div>
           <h3 class="font-black uppercase text-lg mb-2 text-navy">Karyawan</h3>
@@ -133,35 +152,39 @@
     </div>
   </section>
 
-  <!-- Slider Testimoni (2 Orang/Slide) -->
+  <!-- Slider Testimoni (ISI TETAP ADA) -->
   <section id="testimoni" class="py-24 bg-white px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-center text-4xl font-black text-navy uppercase italic mb-16">Alumni Sukses</h2>
+      <h2 class="text-center text-4xl font-black text-navy uppercase mb-16 italic">Alumni Sukses</h2>
       <div class="testimonial-container">
         <div class="testimonial-wrapper" id="slider">
-          <!-- Slide 1 -->
           <div class="testimonial-slide">
             <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col">
-              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold">Gumi Eohakwon benar-benar merubah hidup saya. Sekarang sudah kerja di Incheon!</p>
+              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Gumi Eohakwon benar-benar merubah hidup saya. Sekarang sudah kerja di Incheon!</p>
               <div class="flex items-center gap-4 mt-auto">
                 <img src="https://i.pravatar.cc/150?u=asep" class="w-12 h-12 rounded-full border-2 border-navy">
                 <div><h5 class="font-black text-xs uppercase text-navy">Asep Sunandar</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Manufacturing</p></div>
               </div>
             </div>
             <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-amber-500 flex flex-col">
-              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold">Materi di Area Member sangat membantu belajar di sela-sela kerja.</p>
+              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Materi di Area Member sangat membantu belajar di sela-sela kerja.</p>
               <div class="flex items-center gap-4 mt-auto">
                 <img src="https://i.pravatar.cc/150?u=susi" class="w-12 h-12 rounded-full border-2 border-amber-500">
                 <div><h5 class="font-black text-xs uppercase text-navy">Susi Susanti</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Service</p></div>
               </div>
             </div>
           </div>
-          <!-- Slide 2 -->
           <div class="testimonial-slide">
-             <!-- Konten slide 2 bisa diisi alumni lainnya -->
-             <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col text-center">
-               <p class="font-black uppercase">Testimoni Lainnya...</p>
-             </div>
+            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col">
+              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Bimbingan GToG sangat jelas dan terarah hingga terbang.</p>
+              <div class="flex items-center gap-4 mt-auto">
+                <img src="https://i.pravatar.cc/150?u=amir" class="w-12 h-12 rounded-full border-2 border-navy">
+                <div><h5 class="font-black text-xs uppercase text-navy">Amir Hamzah</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Fishing</p></div>
+              </div>
+            </div>
+            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-amber-500 flex flex-col text-center justify-center">
+               <p class="font-black uppercase text-navy">Dan Ribuan Alumni Lainnya...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -172,12 +195,17 @@
   <footer class="bg-navy text-slate-400 py-16 border-t-8 border-amber-600 text-center md:text-left px-8">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
       <div>
-        <h5 class="font-black text-white uppercase mb-6 italic">Info Pembayaran</h5>
-        <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <h5 class="font-black text-white uppercase mb-6 italic">Pembayaran Resmi</h5>
+        <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
           <p class="text-[8px] text-amber-500 font-black uppercase mb-1">BCA</p>
           <p class="text-xl font-mono text-white font-black">1830467617</p>
           <p class="text-[9px] font-bold mt-1 uppercase text-slate-500">a.n. Deni Supriadi</p>
         </div>
+      </div>
+      <div>
+         <h5 class="font-black text-white uppercase mb-6 italic">Kontak</h5>
+         <p class="text-[10px] font-bold uppercase tracking-widest">📞 0838-5551-800</p>
+         <p class="text-[10px] font-bold uppercase tracking-widest mt-2">📍 SUKABUMI, INDONESIA</p>
       </div>
     </div>
   </footer>

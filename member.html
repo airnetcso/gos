@@ -3,156 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruang Member - Gumi Eohakwon</title>
+  <title>Dashboard Member | Gumi Eohakwon</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
-    .sidebar-item {
-      transition: all 0.3s;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+    
+    /* Menghilangkan semua huruf miring secara global */
+    * { font-style: normal !important; }
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: #FDFBF0; /* Krem */
+      color: #1E293B;
     }
-    .sidebar-item:hover, .sidebar-item.active {
-      background-color: #f3e8ff;
-      color: #6b21a8;
+
+    .bg-navy { background-color: #0F172A; } /* Navy */
+    
+    .sidebar-active { 
+      background-color: #D9A000; /* Kuning Tua */
+      color: white !important;
+      border-radius: 1rem;
     }
+
+    .rounded-pro { border-radius: 2rem !important; }
+
+    /* Kontainer Submenu */
+    .submenu-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .submenu-container.open {
+      max-height: 500px;
+    }
+
+    .locked-card {
+      filter: grayscale(1);
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-page { animation: fadeIn 0.5s ease-out forwards; }
   </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex">
+<body>
 
-  <!-- SIDEBAR KIRI -->
-  <div class="w-72 bg-white border-r h-screen fixed overflow-y-auto shadow-lg">
-    <div class="p-6 border-b">
-      <div class="flex items-center gap-3">
-        <i class="fas fa-graduation-cap text-3xl text-violet-600"></i>
-        <div>
-          <h1 class="font-bold text-xl">Gumi Eohakwon</h1>
-          <p class="text-sm text-gray-500">Ruang Member</p>
-        </div>
+  <!-- ================= LAYAR LOGIN ================= -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-navy p-6">
+    <div class="max-w-md w-full bg-[#FDFBF0] rounded-pro shadow-2xl p-10 text-center border-b-8 border-amber-600">
+      <div class="w-20 h-20 mx-auto bg-navy rounded-2xl flex items-center justify-center text-white text-4xl font-black mb-8 shadow-xl">가</div>
+      <h1 class="text-2xl font-black text-navy uppercase tracking-tighter mb-2">Member Login</h1>
+      <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mb-10">Gumi Eohakwon Sukabumi</p>
+
+      <div class="space-y-4">
+        <input type="password" id="accessCode" 
+               placeholder="KODE AKSES" 
+               class="w-full px-8 py-5 bg-white border-2 border-slate-100 rounded-2xl focus:border-amber-500 outline-none transition-all text-center text-xl font-bold tracking-[0.3em] uppercase">
+        
+        <button onclick="checkAccess()" 
+                class="w-full bg-navy text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg active:scale-95">
+          MASUK DASHBOARD
+        </button>
       </div>
-    </div>
-
-    <div class="p-6 space-y-8">
-      
-      <!-- Kelas Ku -->
-      <div>
-        <h2 class="uppercase text-xs font-semibold text-gray-500 mb-3">Kelas Ku</h2>
-        <div onclick="showContent(0)" class="sidebar-item active flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-seedling text-emerald-500"></i>
-          <span>Kelas Dasar</span>
-        </div>
-        <div onclick="showContent(1)" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-tree text-amber-500"></i>
-          <span>Kelas Lanjutan</span>
-        </div>
-        <div onclick="showContent(2)" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-mountain text-purple-500"></i>
-          <span>Kelas Mahir / EPS TOPIK</span>
-        </div>
-      </div>
-
-      <!-- Materi Belajar -->
-      <div>
-        <h2 class="uppercase text-xs font-semibold text-gray-500 mb-3">Materi Belajar</h2>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-file-pdf text-red-500"></i>
-          <span>Worksheet & PDF</span>
-        </div>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-book text-blue-500"></i>
-          <span>Kosakata Harian</span>
-        </div>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-headphones text-pink-500"></i>
-          <span>Audio Latihan</span>
-        </div>
-      </div>
-
-      <!-- Komunitas -->
-      <div>
-        <h2 class="uppercase text-xs font-semibold text-gray-500 mb-3">Komunitas</h2>
-        <div onclick="showChat()" class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-comment-dots text-blue-500"></i>
-          <span>Tanya Jawab & Chat</span>
-        </div>
-      </div>
-
-      <!-- Akun -->
-      <div>
-        <h2 class="uppercase text-xs font-semibold text-gray-500 mb-3">Akun</h2>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-chart-bar text-emerald-500"></i>
-          <span>Progress Belajar</span>
-        </div>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-certificate text-amber-500"></i>
-          <span>Sertifikat Saya</span>
-        </div>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-calendar text-violet-500"></i>
-          <span>Jadwal Live Zoom</span>
-        </div>
-        <div class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
-          <i class="fas fa-headset text-teal-500"></i>
-          <span>Hubungi Admin</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="absolute bottom-6 left-6 right-6">
-      <button onclick="logout()" class="w-full flex items-center justify-center gap-2 py-3 text-red-500 hover:bg-red-50 rounded-2xl">
-        <i class="fas fa-sign-out-alt"></i> Keluar
-      </button>
     </div>
   </div>
 
-  <!-- KONTEN UTAMA -->
-  <div class="ml-72 flex-1 p-8">
-    <div class="flex justify-between items-center mb-8">
-      <h1 id="pageTitle" class="text-3xl font-bold">Kelas Dasar</h1>
-      <div class="text-gray-500">Halo, Deni 👋</div>
-    </div>
+  <!-- ================= AREA MEMBER UTAMA ================= -->
+  <div id="memberContent" class="hidden flex flex-col md:flex-row min-h-screen">
 
-    <!-- Isi Konten -->
-    <div id="content0">
-      <h2 class="text-xl font-semibold mb-6">Materi Kelas Dasar</h2>
-      <div class="space-y-4">
-        <div class="bg-white p-6 rounded-3xl flex justify-between items-center">
-          <div class="flex items-center gap-4">
-            <i class="fas fa-play-circle text-4xl text-violet-500"></i>
-            <div>
-              <p class="font-medium">1. Pengenalan Hangul & Cara Membaca</p>
-              <p class="text-sm text-gray-500">35 menit</p>
-            </div>
-          </div>
-          <a href="#" class="bg-violet-600 text-white px-6 py-3 rounded-2xl text-sm">Tonton Video</a>
+    <!-- SIDEBAR NAVY -->
+    <aside id="sidebar" class="w-full md:w-72 bg-navy p-6 flex flex-col text-white fixed h-full z-50 overflow-y-auto">
+      <div class="flex items-center gap-3 mb-10 border-b border-white/10 pb-6">
+        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-navy text-xl font-black shadow-lg">가</div>
+        <div class="leading-none">
+          <span class="font-black uppercase tracking-tighter block">Gumi Area</span>
+          <span class="text-[8px] font-bold text-amber-500 uppercase tracking-widest">Premium System</span>
         </div>
-        <!-- Tambah video lain di sini -->
       </div>
-    </div>
 
-    <div id="content1" class="hidden">Kelas Lanjutan</div>
-    <div id="content2" class="hidden">Kelas Mahir</div>
-    <div id="chatContent" class="hidden">Tanya Jawab Chat</div>
+      <nav class="flex-grow space-y-2">
+        <button onclick="showContent('dashboard')" id="nav-dashboard" class="sidebar-active w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase tracking-widest text-left transition-all">
+          <i class="fas fa-th-large"></i> Overview
+        </button>
+
+        <!-- Materi Kursus Accordion -->
+        <div class="pt-2">
+          <button onclick="toggleMenu('submenu-materi', 'chevron-materi')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-book"></i> Materi Kursus
+            </div>
+            <i id="chevron-materi" class="fas fa-chevron-right text-[10px] transition-transform"></i>
+          </button>
+          <div id="submenu-materi" class="submenu-container ml-4 space-y-1">
+            <button onclick="showContent('dasar')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Dasar</button>
+            <button onclick="showContent('lanjutan')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Lanjutan</button>
+            <button onclick="showContent('advance')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Advance</button>
+          </div>
+        </div>
+
+        <!-- Pelengkap Accordion -->
+        <div class="pt-2">
+          <button onclick="toggleMenu('submenu-pelengkap', 'chevron-pelengkap')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
+            <div class="flex items-center gap-4">
+              <i class="fas fa-folder-open"></i> Pelengkap
+            </div>
+            <i id="chevron-pelengkap" class="fas fa-chevron-right text-[10px] transition-transform"></i>
+          </button>
+          <div id="submenu-pelengkap" class="submenu-container ml-4 space-y-1">
+            <button onclick="showContent('module')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Modul PDF</button>
+            <button onclick="showContent('audio')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Audio Listening</button>
+          </div>
+        </div>
+
+        <!-- Link Info GToG Korea -->
+        <div class="pt-6 border-t border-white/10 mt-6 space-y-2">
+          <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-blue-400 hover:bg-white/5 rounded-xl transition-all">
+            <i class="fas fa-info-circle text-lg"></i> Info GToG Korea
+          </a>
+          <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-emerald-400 hover:bg-white/5 rounded-xl transition-all">
+            <i class="fas fa-comments"></i> Konsultasi Admin
+          </button>
+        </div>
+      </nav>
+
+      <button onclick="logout()" class="mt-auto py-4 bg-white/5 rounded-xl text-rose-500 font-bold text-[10px] uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-all">
+        LOGOUT AKUN
+      </button>
+    </aside>
+
+    <!-- MAIN CONTENT KREM -->
+    <main class="flex-1 md:ml-72 p-6 md:p-16 animate-page">
+      <div id="content-dashboard" class="space-y-8">
+        <h2 class="text-4xl font-black text-navy uppercase tracking-tighter border-l-8 border-amber-500 pl-6">Student Overview</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-10 rounded-pro border-b-4 border-navy shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Nama Siswa</p>
+            <p id="nameDisplay" class="text-3xl font-black text-navy uppercase">-</p>
+          </div>
+          <div class="bg-white p-10 rounded-pro border-b-4 border-amber-500 shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Paket Akses</p>
+            <p id="statusDisplay" class="text-2xl font-black text-amber-600 uppercase">-</p>
+          </div>
+        </div>
+
+        <div class="p-10 bg-navy rounded-pro text-white relative overflow-hidden">
+          <h3 class="text-xl font-black uppercase mb-4 relative z-10">Selamat Belajar!</h3>
+          <p class="text-slate-400 text-sm relative z-10 font-bold uppercase">Gunakan dashboard ini untuk mengakses semua materi kursus Anda. Hubungi admin jika ada kendala akses.</p>
+          <i class="fas fa-graduation-cap absolute right-[-20px] bottom-[-20px] text-[150px] text-white/5 rotate-12"></i>
+        </div>
+      </div>
+      
+      <!-- Placeholder untuk halaman materi lainnya -->
+      <div id="content-dasar" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Dasar</h2></div>
+      <div id="content-lanjutan" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Lanjutan</h2></div>
+      <div id="content-advance" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Advance</h2></div>
+      <div id="content-module" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Modul Belajar</h2></div>
+      <div id="content-audio" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Audio Listening</h2></div>
+    </main>
   </div>
 
   <script>
-    function showContent(n) {
-      document.querySelectorAll('#content0, #content1, #content2, #chatContent').forEach(el => el.classList.add('hidden'));
-      document.getElementById('content' + n).classList.remove('hidden');
-      
-      const titles = ["Kelas Dasar", "Kelas Lanjutan", "Kelas Mahir / EPS TOPIK"];
-      document.getElementById('pageTitle').textContent = titles[n];
+    // DATA 3 SAMPEL SISWA
+    const accessDatabase = {
+      "AWEWE21":  { name: "Asep",  owned: ["Dasar"] },
+      "SAWER09":  { name: "Amir",  owned: ["Advance"] },
+      "AMIRA22":  { name: "Susi",  owned: ["Dasar", "Lanjutan"] }
+    };
+
+    let user = null;
+
+    function checkAccess() {
+      const code = document.getElementById('accessCode').value.trim().toUpperCase();
+      if (accessDatabase[code]) {
+        user = accessDatabase[code];
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('memberContent').classList.remove('hidden');
+        document.getElementById('nameDisplay').innerText = user.name;
+        document.getElementById('statusDisplay').innerText = user.owned.join(" & ");
+      } else { 
+        alert("KODE AKSES SALAH!"); 
+      }
     }
 
-    function showChat() {
-      document.querySelectorAll('#content0, #content1, #content2, #chatContent').forEach(el => el.classList.add('hidden'));
-      document.getElementById('chatContent').classList.remove('hidden');
-      document.getElementById('pageTitle').textContent = "Tanya Jawab & Chat";
+    function toggleMenu(menuId, iconId) {
+      const menu = document.getElementById(menuId);
+      const icon = document.getElementById(iconId);
+      menu.classList.toggle('open');
+      icon.style.transform = menu.classList.contains('open') ? 'rotate(90deg)' : 'rotate(0deg)';
+    }
+
+    function showContent(id) {
+      const sections = ['dashboard', 'dasar', 'lanjutan', 'advance', 'module', 'audio'];
+      sections.forEach(sec => {
+        const el = document.getElementById('content-' + sec);
+        if(el) el.classList.add('hidden');
+      });
+      document.getElementById('content-' + id).classList.remove('hidden');
     }
 
     function logout() {
-      if (confirm("Keluar dari Ruang Member?")) {
-        window.location.href = "index.html";
-      }
+      window.location.reload();
+    }
+
+    function contactWA(type) {
+      const phone = "628385551800";
+      const msg = `Halo Admin Gumi Eohakwon, saya ingin bertanya tentang ${type}`;
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
     }
   </script>
 </body>

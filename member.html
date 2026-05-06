@@ -9,26 +9,25 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
-    /* Menghilangkan semua huruf miring secara global */
+    /* No Italic Global */
     * { font-style: normal !important; }
     
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: #FDFBF0; /* Krem */
+      background-color: #FDFBF0; 
       color: #1E293B;
     }
 
-    .bg-navy { background-color: #0F172A; } /* Navy */
+    .bg-navy { background-color: #0F172A; }
     
     .sidebar-active { 
-      background-color: #D9A000; /* Kuning Tua */
+      background-color: #D9A000; 
       color: white !important;
       border-radius: 1rem;
     }
 
     .rounded-pro { border-radius: 2rem !important; }
 
-    /* Kontainer Submenu */
     .submenu-container {
       max-height: 0;
       overflow: hidden;
@@ -38,160 +37,158 @@
       max-height: 500px;
     }
 
-    .locked-card {
-      filter: grayscale(1);
-      opacity: 0.5;
-      cursor: not-allowed;
+    /* Mobile Sidebar Overlay */
+    #sidebar {
+      transition: transform 0.3s ease-in-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @media (max-width: 768px) {
+      #sidebar {
+        transform: translateX(-100%);
+      }
+      #sidebar.show {
+        transform: translateX(0);
+      }
     }
-    .animate-page { animation: fadeIn 0.5s ease-out forwards; }
   </style>
 </head>
 <body>
 
   <!-- ================= LAYAR LOGIN ================= -->
-  <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-navy p-6">
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-navy p-6 z-[200] relative">
     <div class="max-w-md w-full bg-[#FDFBF0] rounded-pro shadow-2xl p-10 text-center border-b-8 border-amber-600">
-      <div class="w-20 h-20 mx-auto bg-navy rounded-2xl flex items-center justify-center text-white text-4xl font-black mb-8 shadow-xl">가</div>
+      <div class="w-20 h-20 mx-auto bg-navy rounded-2xl flex items-center justify-center text-white text-4xl font-black mb-8">가</div>
       <h1 class="text-2xl font-black text-navy uppercase tracking-tighter mb-2">Member Login</h1>
       <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mb-10">Gumi Eohakwon Sukabumi</p>
 
       <div class="space-y-4">
-        <input type="password" id="accessCode" 
-               placeholder="KODE AKSES" 
-               class="w-full px-8 py-5 bg-white border-2 border-slate-100 rounded-2xl focus:border-amber-500 outline-none transition-all text-center text-xl font-bold tracking-[0.3em] uppercase">
-        
-        <button onclick="checkAccess()" 
-                class="w-full bg-navy text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg active:scale-95">
-          MASUK DASHBOARD
-        </button>
+        <input type="password" id="accessCode" placeholder="KODE AKSES" class="w-full px-8 py-5 bg-white border-2 border-slate-100 rounded-2xl focus:border-amber-500 outline-none text-center text-xl font-bold tracking-[0.3em] uppercase">
+        <button onclick="checkAccess()" class="w-full bg-navy text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg">MASUK</button>
       </div>
     </div>
   </div>
 
   <!-- ================= AREA MEMBER UTAMA ================= -->
-  <div id="memberContent" class="hidden flex flex-col md:flex-row min-h-screen">
+  <div id="memberContent" class="hidden flex min-h-screen">
+
+    <!-- Header Mobile (Hanya muncul di HP) -->
+    <header class="md:hidden fixed top-0 w-full bg-navy text-white p-4 flex justify-between items-center z-[60] shadow-xl">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-navy font-black italic">가</div>
+        <span class="font-black uppercase text-xs tracking-tighter">Gumi Area</span>
+      </div>
+      <button onclick="toggleSidebar()" class="text-2xl p-2"><i class="fas fa-bars"></i></button>
+    </header>
 
     <!-- SIDEBAR NAVY -->
-    <aside id="sidebar" class="w-full md:w-72 bg-navy p-6 flex flex-col text-white fixed h-full z-50 overflow-y-auto">
-      <div class="flex items-center gap-3 mb-10 border-b border-white/10 pb-6">
+    <aside id="sidebar" class="w-72 bg-navy p-6 flex flex-col text-white fixed h-full z-[70] overflow-y-auto">
+      <!-- Close button mobile -->
+      <button onclick="toggleSidebar()" class="md:hidden absolute top-6 right-6 text-xl text-slate-400"><i class="fas fa-times"></i></button>
+
+      <div class="flex items-center gap-3 mb-10 border-b border-white/10 pb-6 mt-4 md:mt-0">
         <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-navy text-xl font-black shadow-lg">가</div>
-        <div class="leading-none">
+        <div class="leading-none text-left">
           <span class="font-black uppercase tracking-tighter block">Gumi Area</span>
           <span class="text-[8px] font-bold text-amber-500 uppercase tracking-widest">Premium System</span>
         </div>
       </div>
 
       <nav class="flex-grow space-y-2">
-        <button onclick="showContent('dashboard')" id="nav-dashboard" class="sidebar-active w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase tracking-widest text-left transition-all">
+        <button onclick="showContent('dashboard'); toggleSidebar();" class="sidebar-active w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase tracking-widest text-left">
           <i class="fas fa-th-large"></i> Overview
         </button>
 
-        <!-- Materi Kursus Accordion -->
+        <!-- Materi Kursus -->
         <div class="pt-2">
-          <button onclick="toggleMenu('submenu-materi', 'chevron-materi')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
-            <div class="flex items-center gap-4">
-              <i class="fas fa-book"></i> Materi Kursus
-            </div>
-            <i id="chevron-materi" class="fas fa-chevron-right text-[10px] transition-transform"></i>
+          <button onclick="toggleSub('submenu-materi', 'chevron-materi')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
+            <div class="flex items-center gap-4"><i class="fas fa-book"></i> Materi Kursus</div>
+            <i id="chevron-materi" class="fas fa-chevron-right text-[10px]"></i>
           </button>
           <div id="submenu-materi" class="submenu-container ml-4 space-y-1">
-            <button onclick="showContent('dasar')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Dasar</button>
-            <button onclick="showContent('lanjutan')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Lanjutan</button>
-            <button onclick="showContent('advance')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Advance</button>
+            <button onclick="showContent('dasar'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Dasar</button>
+            <button onclick="showContent('lanjutan'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Lanjutan</button>
           </div>
         </div>
 
-        <!-- Pelengkap Accordion -->
+        <!-- Pelengkap -->
         <div class="pt-2">
-          <button onclick="toggleMenu('submenu-pelengkap', 'chevron-pelengkap')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
-            <div class="flex items-center gap-4">
-              <i class="fas fa-folder-open"></i> Pelengkap
-            </div>
-            <i id="chevron-pelengkap" class="fas fa-chevron-right text-[10px] transition-transform"></i>
+          <button onclick="toggleSub('submenu-pelengkap', 'chevron-pelengkap')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
+            <div class="flex items-center gap-4"><i class="fas fa-folder-open"></i> Pelengkap</div>
+            <i id="chevron-pelengkap" class="fas fa-chevron-right text-[10px]"></i>
           </button>
           <div id="submenu-pelengkap" class="submenu-container ml-4 space-y-1">
-            <button onclick="showContent('module')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Modul PDF</button>
-            <button onclick="showContent('audio')" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500 hover:text-amber-500">Audio Listening</button>
+            <button onclick="showContent('module'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Modul PDF</button>
+            <button onclick="showContent('audio'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Audio Listening</button>
           </div>
         </div>
 
-        <!-- Link Info GToG Korea -->
-        <div class="pt-6 border-t border-white/10 mt-6 space-y-2">
-          <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-blue-400 hover:bg-white/5 rounded-xl transition-all">
-            <i class="fas fa-info-circle text-lg"></i> Info GToG Korea
+        <!-- Link Luar -->
+        <div class="pt-6 border-t border-white/10 mt-6 space-y-2 text-left">
+          <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-blue-400">
+            <i class="fas fa-info-circle"></i> Info GToG Korea
           </a>
-          <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-emerald-400 hover:bg-white/5 rounded-xl transition-all">
+          <button onclick="contactWA('konsultasi'); toggleSidebar();" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-emerald-400">
             <i class="fas fa-comments"></i> Konsultasi Admin
           </button>
         </div>
       </nav>
 
-      <button onclick="logout()" class="mt-auto py-4 bg-white/5 rounded-xl text-rose-500 font-bold text-[10px] uppercase tracking-widest hover:bg-rose-600 hover:text-white transition-all">
-        LOGOUT AKUN
-      </button>
+      <button onclick="logout()" class="mt-auto py-4 bg-white/5 rounded-xl text-rose-500 font-bold text-[10px] uppercase tracking-widest">LOGOUT</button>
     </aside>
 
-    <!-- MAIN CONTENT KREM -->
-    <main class="flex-1 md:ml-72 p-6 md:p-16 animate-page">
-      <div id="content-dashboard" class="space-y-8">
-        <h2 class="text-4xl font-black text-navy uppercase tracking-tighter border-l-8 border-amber-500 pl-6">Student Overview</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-10 rounded-pro border-b-4 border-navy shadow-sm">
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Nama Siswa</p>
-            <p id="nameDisplay" class="text-3xl font-black text-navy uppercase">-</p>
-          </div>
-          <div class="bg-white p-10 rounded-pro border-b-4 border-amber-500 shadow-sm">
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Paket Akses</p>
-            <p id="statusDisplay" class="text-2xl font-black text-amber-600 uppercase">-</p>
-          </div>
-        </div>
+    <!-- Overlay Mobile (Hanya muncul di HP saat sidebar buka) -->
+    <div id="overlay" onclick="toggleSidebar()" class="hidden fixed inset-0 bg-black/50 z-[65] md:hidden"></div>
 
-        <div class="p-10 bg-navy rounded-pro text-white relative overflow-hidden">
-          <h3 class="text-xl font-black uppercase mb-4 relative z-10">Selamat Belajar!</h3>
-          <p class="text-slate-400 text-sm relative z-10 font-bold uppercase">Gunakan dashboard ini untuk mengakses semua materi kursus Anda. Hubungi admin jika ada kendala akses.</p>
-          <i class="fas fa-graduation-cap absolute right-[-20px] bottom-[-20px] text-[150px] text-white/5 rotate-12"></i>
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 md:ml-72 p-6 md:p-16 pt-24 md:pt-16">
+      <div id="content-dashboard" class="space-y-8 text-left">
+        <h2 class="text-3xl md:text-4xl font-black text-navy uppercase tracking-tighter border-l-8 border-amber-500 pl-6">Student Overview</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-8 rounded-pro border-b-4 border-navy shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Nama Siswa</p>
+            <p id="nameDisplay" class="text-2xl font-black text-navy uppercase">-</p>
+          </div>
+          <div class="bg-white p-8 rounded-pro border-b-4 border-amber-500 shadow-sm">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Paket Akses</p>
+            <p id="statusDisplay" class="text-xl font-black text-amber-600 uppercase">-</p>
+          </div>
         </div>
       </div>
       
-      <!-- Placeholder untuk halaman materi lainnya -->
-      <div id="content-dasar" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Dasar</h2></div>
-      <div id="content-lanjutan" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Lanjutan</h2></div>
-      <div id="content-advance" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Materi Advance</h2></div>
-      <div id="content-module" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Modul Belajar</h2></div>
-      <div id="content-audio" class="hidden"><h2 class="text-3xl font-black text-navy uppercase">Audio Listening</h2></div>
+      <!-- Halaman Materi (Placeholder) -->
+      <div id="content-dasar" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Materi Dasar</h2></div>
+      <div id="content-lanjutan" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Materi Lanjutan</h2></div>
+      <div id="content-module" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Modul Belajar</h2></div>
+      <div id="content-audio" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Audio Listening</h2></div>
     </main>
   </div>
 
   <script>
-    // DATA 3 SAMPEL SISWA
     const accessDatabase = {
       "AWEWE21":  { name: "Asep",  owned: ["Dasar"] },
       "SAWER09":  { name: "Amir",  owned: ["Advance"] },
       "AMIRA22":  { name: "Susi",  owned: ["Dasar", "Lanjutan"] }
     };
 
-    let user = null;
-
     function checkAccess() {
       const code = document.getElementById('accessCode').value.trim().toUpperCase();
       if (accessDatabase[code]) {
-        user = accessDatabase[code];
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('memberContent').classList.remove('hidden');
-        document.getElementById('nameDisplay').innerText = user.name;
-        document.getElementById('statusDisplay').innerText = user.owned.join(" & ");
-      } else { 
-        alert("KODE AKSES SALAH!"); 
-      }
+        document.getElementById('nameDisplay').innerText = accessDatabase[code].name;
+        document.getElementById('statusDisplay').innerText = accessDatabase[code].owned.join(" & ");
+      } else { alert("KODE AKSES SALAH!"); }
     }
 
-    function toggleMenu(menuId, iconId) {
+    function toggleSidebar() {
+      const sb = document.getElementById('sidebar');
+      const ov = document.getElementById('overlay');
+      sb.classList.toggle('show');
+      ov.classList.toggle('hidden');
+    }
+
+    function toggleSub(menuId, iconId) {
       const menu = document.getElementById(menuId);
       const icon = document.getElementById(iconId);
       menu.classList.toggle('open');
@@ -199,23 +196,13 @@
     }
 
     function showContent(id) {
-      const sections = ['dashboard', 'dasar', 'lanjutan', 'advance', 'module', 'audio'];
-      sections.forEach(sec => {
-        const el = document.getElementById('content-' + sec);
-        if(el) el.classList.add('hidden');
-      });
+      const sections = ['dashboard', 'dasar', 'lanjutan', 'module', 'audio'];
+      sections.forEach(sec => document.getElementById('content-' + sec).classList.add('hidden'));
       document.getElementById('content-' + id).classList.remove('hidden');
     }
 
-    function logout() {
-      window.location.reload();
-    }
-
-    function contactWA(type) {
-      const phone = "628385551800";
-      const msg = `Halo Admin Gumi Eohakwon, saya ingin bertanya tentang ${type}`;
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-    }
+    function logout() { window.location.reload(); }
+    function contactWA(type) { window.open(`https://wa.me/628385551800?text=Halo Admin Gumi, saya mau tanya ${type}`, '_blank'); }
   </script>
 </body>
 </html>

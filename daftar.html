@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar - Gumi Eohakwon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 py-12">
+  <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Formulir Pendaftaran</h1>
+    
+    <form action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" method="POST">
+      <input type="text" name="nama" placeholder="Nama Lengkap" class="w-full border rounded-xl px-5 py-4 mb-4" required>
+      <input type="text" name="wa" placeholder="Nomor WhatsApp" class="w-full border rounded-xl px-5 py-4 mb-4" required>
+      <select name="program" class="w-full border rounded-xl px-5 py-4 mb-4">
+        <option value="">Pilih Program</option>
+        <option value="EPS TOPIK">EPS TOPIK Intensive</option>
+        <option value="Bahasa Korea">Bahasa Korea Umum</option>
+        <option value="Offline Reguler">Offline Reguler</option>
+      </select>
+      <button type="submit" class="w-full bg-indigo-600 text-white py-4 rounded-2xl">Kirim Pendaftaran</button>
+    </form>
+  </div>
+</body>
+</html>

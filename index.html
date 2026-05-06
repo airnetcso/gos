@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gumi Eohakwon | Korea Education Center</title>
+  <title>Gumi Eohakwon Sukabumi | Kursus Bahasa Korea Profesional</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
-    /* MENGHILANGKAN HURUF MIRING SECARA GLOBAL */
+    /* Menghilangkan semua huruf miring secara global */
     * { font-style: normal !important; }
     
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FDFBF0; }
@@ -23,7 +23,7 @@
                   url('https://images.unsplash.com/photo-1517147196916-a5181716c514?q=80&w=2000') center/cover no-repeat;
     }
 
-    /* Efek Card Paket */
+    /* Efek Card Paket Berwarna Lembut */
     .card-premium { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); background: white; }
     .card-premium:hover { transform: translateY(-12px) scale(1.02); filter: brightness(1.05); box-shadow: 0 25px 50px -12px rgba(30, 41, 59, 0.15); }
 
@@ -39,21 +39,15 @@
     @media (min-width: 768px) { .testimonial-slide { grid-template-columns: repeat(2, 1fr); } }
 
     /* Mobile Menu Sidebar */
-    #mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-    }
-    #mobile-menu.show {
-      transform: translateX(0);
-    }
+    #mobile-menu { transform: translateX(100%); transition: transform 0.3s ease-in-out; }
+    #mobile-menu.show { transform: translateX(0); }
   </style>
 </head>
 <body class="text-slate-800">
 
-  <!-- Navbar -->
+  <!-- Navbar Minimalis -->
   <nav class="fixed top-0 w-full z-[100] bg-white/90 backdrop-blur-md border-b-2 border-navy">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 bg-navy rounded-xl flex items-center justify-center text-white text-2xl font-black shadow-lg">가</div>
         <div class="leading-tight">
@@ -62,21 +56,19 @@
         </div>
       </div>
 
-      <!-- Menu Desktop (Hanya Program & Member Area) -->
       <div class="hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-widest text-slate-600">
         <a href="#program" class="hover:text-amber-600 transition-colors">Program</a>
         <a href="member.html" class="px-5 py-2 bg-slate-100 rounded-xl hover:bg-navy hover:text-white transition-all">Member Area</a>
         <a href="daftar.html" class="bg-navy text-white px-6 py-3 rounded-xl font-black transition-all shadow-md">Daftar</a>
       </div>
 
-      <!-- Tombol Hamburger Mobile -->
       <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-navy">
         <i class="fas fa-bars"></i>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu Sidebar Overlay (Hanya Program & Member Area) -->
+  <!-- Mobile Menu -->
   <div id="mobile-menu" class="fixed inset-y-0 right-0 w-64 bg-navy z-[110] p-10 flex flex-col gap-6 shadow-2xl md:hidden">
     <button onclick="toggleMobileMenu()" class="text-white text-right text-2xl"><i class="fas fa-times"></i></button>
     <a href="#program" onclick="toggleMobileMenu()" class="text-white font-black uppercase tracking-widest text-sm">Program</a>
@@ -86,104 +78,132 @@
 
   <!-- Hero Section -->
   <section class="hero-gradient pt-48 pb-32 text-white px-6 text-center">
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl md:text-7xl font-black mb-8 uppercase tracking-tighter">Wujudkan Karir Di <span class="text-amber-500">Korea Selatan</span></h1>
-      <p class="text-md md:text-lg text-slate-300 mb-12 max-w-2xl mx-auto uppercase tracking-widest font-bold">Bimbingan EPS-TOPIK Profesional Terakreditasi</p>
-      <a href="daftar.html" class="bg-amber-600 text-white px-10 md:px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl">Mulai Belajar</a>
+      <p class="text-md md:text-lg text-slate-300 mb-12 max-w-2xl mx-auto uppercase tracking-widest font-bold leading-relaxed">Bimbingan EPS-TOPIK Terpercaya Dengan Pengajar Alumni Korea Selatan</p>
+      <a href="daftar.html" class="bg-amber-600 text-white px-10 md:px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest shadow-xl">Daftar Sekarang</a>
     </div>
   </section>
 
-  <!-- Section Keunggulan (ISI TETAP ADA) -->
+  <!-- Section Keunggulan Terperinci -->
   <section id="keunggulan" class="py-20 bg-white px-6">
-    <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
-        <div class="text-4xl mb-4">🏆</div>
-        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Lulusan Terbanyak</h4>
-        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Terbukti memberangkatkan ribuan siswa.</p>
+    <div class="max-w-7xl mx-auto text-center mb-16">
+      <h2 class="text-3xl font-black text-navy uppercase tracking-tighter italic">Kenapa Harus Gumi Eohakwon?</h2>
+    </div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 shadow-sm text-left">
+        <div class="text-3xl mb-4 text-amber-500"><i class="fas fa-user-tie"></i></div>
+        <h4 class="font-black text-navy uppercase text-xs tracking-widest mb-2">Pengajar Berpengalaman</h4>
+        <p class="text-[10px] text-slate-500 font-bold uppercase leading-relaxed">Dibimbing langsung oleh instruktur alumni Korea Selatan yang ahli di bidangnya.</p>
       </div>
-      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
-        <div class="text-4xl mb-4">👨‍🏫</div>
-        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Master Pengajar</h4>
-        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Dibimbing praktisi & alumni Korea.</p>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 shadow-sm text-left">
+        <div class="text-3xl mb-4 text-amber-500"><i class="fas fa-tags"></i></div>
+        <h4 class="font-black text-navy uppercase text-xs tracking-widest mb-2">Biaya Terjangkau</h4>
+        <p class="text-[10px] text-slate-500 font-bold uppercase leading-relaxed">Biaya pendidikan sangat terjangkau dengan fasilitas premium dan sistem pembayaran fleksibel.</p>
       </div>
-      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
-        <div class="text-4xl mb-4">📖</div>
-        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Materi Update</h4>
-        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Sesuai standar EPS-TOPIK terbaru.</p>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 shadow-sm text-left">
+        <div class="text-3xl mb-4 text-amber-500"><i class="fas fa-book-open"></i></div>
+        <h4 class="font-black text-navy uppercase text-xs tracking-widest mb-2">Materi Lengkap</h4>
+        <p class="text-[10px] text-slate-500 font-bold uppercase leading-relaxed">Kurikulum EPS-TOPIK terbaru, modul PDF, audio listening, dan simulasi try out rutin.</p>
       </div>
-      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 text-center shadow-sm">
-        <div class="text-4xl mb-4">💬</div>
-        <h4 class="font-black text-navy uppercase text-[10px] tracking-widest">Konsultasi GToG</h4>
-        <p class="text-[9px] text-slate-500 mt-2 font-bold uppercase">Gratis bimbingan pendaftaran.</p>
+      <div class="p-8 rounded-modern bg-[#FDFBF0] border border-amber-100 shadow-sm text-left">
+        <div class="text-3xl mb-4 text-amber-500"><i class="fas fa-certificate"></i></div>
+        <h4 class="font-black text-navy uppercase text-xs tracking-widest mb-2">Bersertifikat Resmi</h4>
+        <p class="text-[10px] text-slate-500 font-bold uppercase leading-relaxed">Setiap siswa yang menyelesaikan program akan mendapatkan sertifikat pelatihan resmi.</p>
       </div>
     </div>
   </section>
 
-  <!-- Section Program -->
-  <section id="program" class="py-20 px-6 bg-[#FDFBF0]">
-    <div class="max-w-7xl mx-auto text-center">
-      <h2 class="text-3xl md:text-5xl font-black text-navy uppercase mb-16 italic">Paket Belajar</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="card-premium card-dasar p-8 rounded-modern flex flex-col text-left">
-          <div class="text-3xl mb-4 text-blue-600"><i class="fas fa-video"></i></div>
-          <h3 class="font-black uppercase text-lg mb-2 text-navy">Online Video</h3>
-          <p class="text-2xl font-black text-navy mb-8">Rp 2.000.000</p>
-          <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase">Pilih Paket</a>
-        </div>
-        <div class="card-premium card-lanjutan p-8 rounded-modern flex flex-col text-left">
-          <div class="text-3xl mb-4 text-purple-600"><i class="fas fa-bolt"></i></div>
-          <h3 class="font-black uppercase text-lg mb-2 text-navy">Online Live</h3>
-          <p class="text-2xl font-black text-navy mb-8">Rp 3.000.000</p>
-          <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase shadow-lg">Pilih Paket</a>
-        </div>
-        <div class="card-premium card-advance p-8 rounded-modern flex flex-col text-left">
-          <div class="text-3xl mb-4 text-rose-600"><i class="fas fa-school"></i></div>
-          <h3 class="font-black uppercase text-lg mb-2 text-navy">Offline</h3>
-          <p class="text-2xl font-black text-navy mb-8">Rp 6.000.000</p>
-          <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase">Pilih Paket</a>
-        </div>
-        <div class="card-premium card-karyawan p-8 rounded-modern flex flex-col text-left">
-          <div class="text-3xl mb-4 text-emerald-600"><i class="fas fa-briefcase"></i></div>
-          <h3 class="font-black uppercase text-lg mb-2 text-navy">Karyawan</h3>
-          <p class="text-2xl font-black text-navy mb-8">Rp 4.000.000</p>
-          <a href="daftar.html" class="mt-auto w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase">Pilih Paket</a>
-        </div>
+  <!-- Section Program Dengan Detail Penuh -->
+  <section id="program" class="py-24 px-6 bg-[#FDFBF0]">
+    <div class="max-w-7xl mx-auto text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-black text-navy uppercase tracking-tighter italic">Program Unggulan Kami</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      <!-- Online Video -->
+      <div class="card-premium card-dasar p-8 rounded-modern flex flex-col text-left">
+        <div class="text-2xl mb-4 text-blue-600 font-black">🎬 VIDEO</div>
+        <h3 class="font-black uppercase text-lg mb-4 text-navy">Online Video</h3>
+        <ul class="text-[10px] font-bold text-slate-600 uppercase space-y-2 mb-8 flex-grow">
+          <li><i class="fas fa-check text-blue-500 mr-2"></i> Akses 50+ Materi Video</li>
+          <li><i class="fas fa-check text-blue-500 mr-2"></i> Belajar Kapan Saja</li>
+          <li><i class="fas fa-check text-blue-500 mr-2"></i> Modul PDF & Audio</li>
+        </ul>
+        <div class="text-2xl font-black text-navy mb-6">Rp 2.000.000</div>
+        <a href="daftar.html" class="w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all">Pilih Paket</a>
+      </div>
+
+      <!-- Online Live -->
+      <div class="card-premium card-lanjutan p-8 rounded-modern flex flex-col text-left">
+        <div class="text-2xl mb-4 text-purple-600 font-black">⚡ LIVE</div>
+        <h3 class="font-black uppercase text-lg mb-4 text-navy">Online Live</h3>
+        <ul class="text-[10px] font-bold text-slate-600 uppercase space-y-2 mb-8 flex-grow">
+          <li><i class="fas fa-check text-purple-500 mr-2"></i> Tatap Muka Zoom</li>
+          <li><i class="fas fa-check text-purple-500 mr-2"></i> Tanya Jawab Langsung</li>
+          <li><i class="fas fa-check text-purple-500 mr-2"></i> Rekaman Ulang</li>
+        </ul>
+        <div class="text-2xl font-black text-navy mb-6">Rp 3.000.000</div>
+        <a href="daftar.html" class="w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-purple-600 transition-all">Ambil Promo</a>
+      </div>
+
+      <!-- Offline -->
+      <div class="card-premium card-advance p-8 rounded-modern flex flex-col text-left">
+        <div class="text-2xl mb-4 text-rose-600 font-black">🏫 KELAS</div>
+        <h3 class="font-black uppercase text-lg mb-4 text-navy">Reguler Offline</h3>
+        <ul class="text-[10px] font-bold text-slate-600 uppercase space-y-2 mb-8 flex-grow">
+          <li><i class="fas fa-check text-rose-500 mr-2"></i> Belajar Di Sukabumi</li>
+          <li><i class="fas fa-check text-rose-500 mr-2"></i> Fasilitas Ruang AC</li>
+          <li><i class="fas fa-check text-rose-500 mr-2"></i> Simulasi CBT Rutin</li>
+        </ul>
+        <div class="text-2xl font-black text-navy mb-6">Rp 6.000.000</div>
+        <a href="daftar.html" class="w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-rose-600 transition-all">Daftar Sekarang</a>
+      </div>
+
+      <!-- Karyawan -->
+      <div class="card-premium card-karyawan p-8 rounded-modern flex flex-col text-left">
+        <div class="text-2xl mb-4 text-emerald-600 font-black">💼 KERJA</div>
+        <h3 class="font-black uppercase text-lg mb-4 text-navy">Kelas Karyawan</h3>
+        <ul class="text-[10px] font-bold text-slate-600 uppercase space-y-2 mb-8 flex-grow">
+          <li><i class="fas fa-check text-emerald-500 mr-2"></i> Jadwal Malam/Libur</li>
+          <li><i class="fas fa-check text-emerald-500 mr-2"></i> Fokus Materi Inti</li>
+          <li><i class="fas fa-check text-emerald-500 mr-2"></i> Konsultasi 24 Jam</li>
+        </ul>
+        <div class="text-2xl font-black text-navy mb-6">Rp 4.000.000</div>
+        <a href="daftar.html" class="w-full py-4 bg-navy text-white text-center rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all">Pilih Paket</a>
       </div>
     </div>
   </section>
 
-  <!-- Slider Testimoni (ISI TETAP ADA) -->
+  <!-- Slider Testimoni (2 Orang/Slide) -->
   <section id="testimoni" class="py-24 bg-white px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-center text-4xl font-black text-navy uppercase mb-16 italic">Alumni Sukses</h2>
+      <h2 class="text-center text-4xl font-black text-navy uppercase mb-16 italic">Alumni Sukses Kami</h2>
       <div class="testimonial-container">
         <div class="testimonial-wrapper" id="slider">
+          <!-- Slide 1 -->
           <div class="testimonial-slide">
-            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col">
-              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Gumi Eohakwon benar-benar merubah hidup saya. Sekarang sudah kerja di Incheon!</p>
+            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col shadow-sm">
+              <p class="text-slate-600 text-xs mb-6 uppercase font-black leading-relaxed">Gumi Eohakwon adalah kunci sukses saya bekerja di Korea Selatan. Materi Listening sangat membantu!</p>
               <div class="flex items-center gap-4 mt-auto">
-                <img src="https://i.pravatar.cc/150?u=asep" class="w-12 h-12 rounded-full border-2 border-navy">
-                <div><h5 class="font-black text-xs uppercase text-navy">Asep Sunandar</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Manufacturing</p></div>
+                <img src="https://i.pravatar.cc/150?u=asep" class="w-10 h-10 rounded-full border-2 border-navy">
+                <div><h5 class="font-black text-[10px] uppercase text-navy">Asep Sunandar</h5><p class="text-[8px] font-bold text-amber-600 uppercase">Manufacturing - Busan</p></div>
               </div>
             </div>
-            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-amber-500 flex flex-col">
-              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Materi di Area Member sangat membantu belajar di sela-sela kerja.</p>
+            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-amber-500 flex flex-col shadow-sm">
+              <p class="text-slate-600 text-xs mb-6 uppercase font-black leading-relaxed">Biaya terjangkau tapi pengajarnya sangat profesional. Saya lulus ujian EPS-TOPIK sekali tes!</p>
               <div class="flex items-center gap-4 mt-auto">
-                <img src="https://i.pravatar.cc/150?u=susi" class="w-12 h-12 rounded-full border-2 border-amber-500">
-                <div><h5 class="font-black text-xs uppercase text-navy">Susi Susanti</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Service</p></div>
+                <img src="https://i.pravatar.cc/150?u=susi" class="w-10 h-10 rounded-full border-2 border-amber-500">
+                <div><h5 class="font-black text-[10px] uppercase text-navy">Susi Susanti</h5><p class="text-[8px] font-bold text-amber-600 uppercase">Service - Seoul</p></div>
               </div>
             </div>
           </div>
+          <!-- Slide 2 -->
           <div class="testimonial-slide">
-            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col">
-              <p class="text-slate-600 text-sm mb-6 leading-relaxed font-bold uppercase">Bimbingan GToG sangat jelas dan terarah hingga terbang.</p>
-              <div class="flex items-center gap-4 mt-auto">
-                <img src="https://i.pravatar.cc/150?u=amir" class="w-12 h-12 rounded-full border-2 border-navy">
-                <div><h5 class="font-black text-xs uppercase text-navy">Amir Hamzah</h5><p class="text-[9px] font-bold text-amber-600 uppercase">Fishing</p></div>
-              </div>
+            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-navy flex flex-col shadow-sm text-center justify-center">
+              <p class="font-black uppercase text-navy text-xs">Bergabunglah Dengan Ribuan Alumni Sukses Lainnya</p>
             </div>
-            <div class="bg-[#FDFBF0] p-8 rounded-modern border-l-8 border-amber-500 flex flex-col text-center justify-center">
-               <p class="font-black uppercase text-navy">Dan Ribuan Alumni Lainnya...</p>
+            <div class="bg-navy p-8 rounded-modern flex flex-col text-center justify-center">
+              <a href="daftar.html" class="text-white font-black uppercase text-xs hover:text-amber-500">Daftar Sekarang Juga →</a>
             </div>
           </div>
         </div>
@@ -191,22 +211,29 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-navy text-slate-400 py-16 border-t-8 border-amber-600 text-center md:text-left px-8">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+  <!-- Footer Info -->
+  <footer class="bg-navy text-slate-400 py-16 border-t-8 border-amber-600 px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
       <div>
-        <h5 class="font-black text-white uppercase mb-6 italic">Pembayaran Resmi</h5>
-        <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
-          <p class="text-[8px] text-amber-500 font-black uppercase mb-1">BCA</p>
-          <p class="text-xl font-mono text-white font-black">1830467617</p>
-          <p class="text-[9px] font-bold mt-1 uppercase text-slate-500">a.n. Deni Supriadi</p>
+        <h5 class="font-black text-white uppercase mb-6 italic">Gumi Eohakwon</h5>
+        <p class="text-[10px] font-bold uppercase tracking-widest leading-relaxed">Pusat Pendidikan Bahasa Korea Terbaik Di Sukabumi Untuk Persiapan GToG Korea Selatan.</p>
+      </div>
+      <div>
+        <h5 class="font-black text-white uppercase mb-6 italic">Pembayaran Pendaftaran</h5>
+        <div class="bg-white/5 p-4 rounded-xl border border-white/10 inline-block md:block">
+          <p class="text-[8px] text-amber-500 font-black uppercase mb-1">BANK BCA</p>
+          <p class="text-xl font-mono text-white font-black tracking-widest">1830467617</p>
+          <p class="text-[9px] font-bold mt-1 uppercase text-slate-500 font-black italic">a.n. Deni Supriadi</p>
         </div>
       </div>
       <div>
-         <h5 class="font-black text-white uppercase mb-6 italic">Kontak</h5>
-         <p class="text-[10px] font-bold uppercase tracking-widest">📞 0838-5551-800</p>
-         <p class="text-[10px] font-bold uppercase tracking-widest mt-2">📍 SUKABUMI, INDONESIA</p>
+        <h5 class="font-black text-white uppercase mb-6 italic">Hubungi Kami</h5>
+        <p class="text-[10px] font-bold uppercase tracking-widest">📞 0838-5551-800</p>
+        <p class="text-[10px] font-bold uppercase tracking-widest mt-2">📍 SUKABUMI, JAWA BARAT, INDONESIA</p>
       </div>
+    </div>
+    <div class="text-center mt-12 pt-8 border-t border-white/5 text-[9px] font-black uppercase tracking-[0.3em]">
+      &copy; 2026 Gumi Eohakwon Sukabumi. All rights reserved.
     </div>
   </footer>
 
@@ -220,7 +247,7 @@
     setInterval(() => {
       currentSlide = (currentSlide + 1) % 2;
       slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }, 5000);
+    }, 6000);
   </script>
 </body>
 </html>

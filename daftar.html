@@ -12,11 +12,13 @@
       font-family: 'Plus Jakarta Sans', sans-serif; 
     }
     .rounded-modern { border-radius: 1rem !important; }
+    
     .package-card {
       transition: all 0.3s ease;
+      height: 100%;
     }
     .package-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
     }
     .popular::after {
@@ -28,27 +30,29 @@
       color: white;
       font-size: 10px;
       font-weight: 700;
-      padding: 4px 14px;
+      padding: 3px 12px;
       border-radius: 9999px;
     }
   </style>
 </head>
-<body class="min-h-screen py-12">
+<body class="min-h-screen py-10">
 
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center mb-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-10">
       <div class="w-16 h-16 bg-slate-900 rounded-2xl mx-auto flex items-center justify-center text-white text-5xl font-black mb-6">가</div>
       <h1 class="text-4xl font-bold text-slate-900">Pilih Paket Kursus</h1>
       <p class="text-slate-600 mt-2">Gumi Eohakwon Sukabumi</p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-16" id="packageList">
-      <!-- Paket akan di-generate oleh JS -->
+    <!-- Package Grid - Lebih Ramping -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16" id="packageList">
+      <!-- Cards akan di-generate oleh JS -->
     </div>
 
-    <!-- Formulir Pendaftaran (muncul setelah memilih paket) -->
-    <div id="registrationFormSection" class="hidden max-w-md mx-auto bg-white rounded-modern shadow-2xl p-8 mt-12">
-      <h2 class="text-2xl font-bold text-center mb-6">Formulir Pendaftaran</h2>
+    <!-- Formulir Pendaftaran -->
+    <div id="registrationFormSection" class="hidden max-w-lg mx-auto bg-white rounded-modern shadow-2xl p-8">
+      <h2 class="text-2xl font-bold text-center mb-6 text-slate-900">Formulir Pendaftaran</h2>
       
       <div class="space-y-6">
         <div>
@@ -78,25 +82,25 @@
         name: "Kelas Dasar",
         price: "Rp 149.000",
         popular: false,
-        features: ["50+ Video Materi", "Modul PDF & Latihan", "Akses Selamanya", "Grup Konsultasi WA"]
+        features: ["50+ Video", "Modul PDF", "Akses Selamanya", "Grup WA"]
       },
       {
         name: "Tutorial Lengkap",
         price: "Rp 450.000",
         popular: false,
-        features: ["Materi Dasar + Menengah", "Video Full", "Akses 1 Tahun", "Konsultasi Prioritas", "Sertifikat"]
+        features: ["Dasar + Menengah", "Video Full", "Akses 1 Tahun", "Sertifikat"]
       },
       {
         name: "Online Live Zoom",
         price: "Rp 1.200.000",
         popular: true,
-        features: ["Kelas Live via Zoom", "Interaksi Langsung", "Materi Lengkap", "Rekaman Kelas", "Grup Exclusive"]
+        features: ["Kelas Live Zoom", "Interaksi Guru", "Rekaman", "Grup Exclusive"]
       },
       {
         name: "Kelas Reguler Offline",
         price: "Rp 4.500.000",
         popular: false,
-        features: ["Kelas Offline Sukabumi", "Durasi 3 Bulan", "Materi Full", "Bimbingan Privat", "Job Placement Info"]
+        features: ["Kelas Offline", "3 Bulan Intensif", "Bimbingan Privat", "Job Info"]
       }
     ];
 
@@ -106,15 +110,17 @@
 
       packages.forEach(pkg => {
         const cardHTML = `
-          <div class="package-card bg-white rounded-modern shadow-xl p-8 border ${pkg.popular ? 'popular border-emerald-200' : 'border-slate-100'}">
-            <h3 class="text-2xl font-bold text-slate-900 mb-1">${pkg.name}</h3>
-            <div class="text-4xl font-bold text-emerald-600 my-6">${pkg.price}</div>
-            <ul class="space-y-3 mb-8 text-slate-600">
-              ${pkg.features.map(f => `<li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-1"></i>${f}</li>`).join('')}
+          <div class="package-card bg-white rounded-modern shadow-xl p-6 border ${pkg.popular ? 'popular border-emerald-200' : 'border-slate-100'} relative">
+            <h3 class="text-xl font-bold text-slate-900 mb-1">${pkg.name}</h3>
+            <div class="text-3xl font-bold text-emerald-600 my-5">${pkg.price}</div>
+            
+            <ul class="space-y-2 mb-8 text-sm text-slate-600">
+              ${pkg.features.map(f => `<li class="flex items-start gap-2"><i class="fas fa-check text-emerald-500 mt-0.5"></i>${f}</li>`).join('')}
             </ul>
+            
             <button onclick="selectPackage('${pkg.name} - ${pkg.price}')" 
-                    class="w-full ${pkg.popular ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-slate-900 hover:bg-emerald-600'} text-white font-bold py-5 rounded-modern transition-all">
-              PILIH PAKET INI
+                    class="w-full ${pkg.popular ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-slate-900 hover:bg-emerald-600'} text-white font-bold py-4 rounded-modern transition-all">
+              PILIH PAKET
             </button>
           </div>
         `;
@@ -138,16 +144,13 @@
       const nama = document.getElementById('studentName').value.trim();
       const paket = document.getElementById('selectedPackage').value;
 
-      if (!nama) {
-        alert("Mohon isi nama lengkap Anda");
-        return;
-      }
+      if (!nama) return alert("Mohon isi nama lengkap Anda");
+      if (!paket) return alert("Mohon pilih paket terlebih dahulu");
 
-      const msg = `Halo Admin Gumi,%0ASaya *${nama}* ingin mendaftar:%0A*${paket}*%0AMohon info pembayaran dan langkah selanjutnya. Terima kasih.`;
+      const msg = `Halo Admin Gumi,%0ASaya *${nama}* ingin mendaftar:%0A*${paket}*%0AMohon info pembayaran ya. Terima kasih.`;
       window.open(`https://wa.me/628385551800?text=${msg}`, '_blank');
     }
 
-    // Load packages
     window.onload = renderPackages;
   </script>
 </body>

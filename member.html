@@ -34,6 +34,19 @@
     }
     .list-row:hover { background-color: #E4DCCF; }
 
+    /* Indikator Sudah Ditonton */
+    .watched {
+      background-color: #F1F5F9 !important;
+      opacity: 0.7;
+    }
+    .watched .title-text {
+      color: #94A3B8 !important;
+      text-decoration: line-through;
+    }
+    .watched i.fa-play-circle {
+      color: #CBD5E1 !important;
+    }
+
     .video-container {
       background: black;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
@@ -117,8 +130,8 @@
     <main class="flex-1 ml-[280px] p-6 md:p-12">
       <div id="content-main">
         <div id="dashboard-info" class="p-8 bg-[#FDFBF9] border-l-4 border-[#D6C7AE] rounded-r-xl shadow-sm">
-           <h3 class="font-bold text-slate-800 mb-2 italic text-2xl">Annyeonghaseyo!</h3>
-           <p class="text-slate-600 leading-relaxed text-lg">Silahkan pilih menu di sidebar untuk mulai belajar.</p>
+           <h3 class="font-bold text-slate-800 mb-2 italic text-2xl text-center">Annyeonghaseyo!</h3>
+           <p class="text-slate-600 leading-relaxed text-lg text-center">Silahkan pilih menu di sidebar untuk mulai belajar.</p>
         </div>
 
         <div id="list-container" class="hidden">
@@ -136,11 +149,6 @@
         </div>
         <div class="video-container aspect-video">
           <iframe id="videoPlayer" width="100%" height="100%" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-        <div class="mt-8 text-center">
-            <button onclick="closeVideo()" class="px-10 py-4 bg-emerald-600 text-white font-bold rounded-xl hover:bg-slate-900 transition-all shadow-lg">
-                <i class="fas fa-check-circle"></i> SELESAI BELAJAR & KEMBALI
-            </button>
         </div>
       </div>
     </main>
@@ -168,6 +176,8 @@
     const videoUrl = "https://drive.google.com/file/d/1KspUnWD-wzu4L9LiCMYf7--ksIvMPwl9/preview";
 
     let currentUser = null;
+    let currentCategory = null;
+    let watchedVideos = JSON.parse(localStorage.getItem('gumi_watched_list')) || [];
 
     function checkAccess() {
       const code = document.getElementById('accessCode').value.trim().toUpperCase();
@@ -181,19 +191,26 @@
 
     function showClassSection(type) {
       resetView();
+      currentCategory = type;
       const data = classData[type];
       const hasAccess = type === 'dasar' || currentUser.owned.includes(type.charAt(0).toUpperCase() + type.slice(1));
       document.getElementById('list-title').innerHTML = `<i class="${data.icon}"></i> ${data.title}`;
       let html = '';
-      data.items.forEach(item => {
+      
+      data.items.forEach((item, index) => {
+        const videoKey = `${type}_${index}`;
+        const isWatched = watchedVideos.includes(videoKey);
+        
         if (hasAccess) {
           html += `
-            <div class="list-row cursor-pointer" onclick="playVideo()">
+            <div class="list-row cursor-pointer ${isWatched ? 'watched' : ''}" onclick="playVideo('${videoKey}')">
               <div class="flex items-center gap-3">
-                <i class="fas fa-play-circle text-emerald-500"></i>
-                <span class="font-semibold text-slate-700 text-sm">${item}</span>
+                <i class="fas fa-play-circle ${isWatched ? '' : 'text-emerald-500'}"></i>
+                <span class="font-semibold title-text text-sm">${item}</span>
               </div>
-              <span class="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded uppercase">Mulai Belajar</span>
+              <span class="text-[10px] font-bold ${isWatched ? 'text-slate-400' : 'text-emerald-600 bg-emerald-100'} px-2 py-1 rounded uppercase">
+                ${isWatched ? 'SUDAH DITONTON' : 'Mulai Belajar'}
+              </span>
             </div>`;
         } else {
           html += `
@@ -213,6 +230,7 @@
 
     function showModuleSection(type) {
       resetView();
+      currentCategory = null;
       const data = moduleData[type];
       document.getElementById('list-title').innerHTML = `<i class="${data.icon}"></i> ${data.title}`;
       let html = '';
@@ -231,19 +249,22 @@
       document.getElementById('dashboard-info').classList.add('hidden');
     }
 
-    function playVideo() {
+    function playVideo(videoKey) {
       document.getElementById('content-main').classList.add('hidden');
       document.getElementById('content-video').classList.remove('hidden');
       document.getElementById('videoPlayer').src = videoUrl;
       
-      // Auto-return ke list setelah simulasi waktu (opsional)
-      // Jika ingin manual klik, gunakan tombol "Selesai Belajar" yang baru ditambahkan.
+      if (!watchedVideos.includes(videoKey)) {
+        watchedVideos.push(videoKey);
+        localStorage.setItem('gumi_watched_list', JSON.stringify(watchedVideos));
+      }
     }
 
     function closeVideo() {
       document.getElementById('videoPlayer').src = "";
       document.getElementById('content-video').classList.add('hidden');
       document.getElementById('content-main').classList.remove('hidden');
+      if (currentCategory) showClassSection(currentCategory);
     }
 
     function showDashboard() {

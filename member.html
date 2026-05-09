@@ -23,7 +23,6 @@
       letter-spacing: 0.025em;
     }
 
-    /* Styling List Padat & Rapat */
     .list-row {
       display: flex;
       align-items: center;
@@ -34,7 +33,6 @@
     }
     .list-row:hover { background-color: #E4DCCF; }
 
-    /* Indikator Sudah Ditonton */
     .watched {
       background-color: #F1F5F9 !important;
       opacity: 0.7;
@@ -43,7 +41,7 @@
       color: #94A3B8 !important;
       text-decoration: line-through;
     }
-    .watched i.fa-play-circle {
+    .watched i.fa-play-circle, .watched i.fa-file-pdf, .watched i.fa-headphones {
       color: #CBD5E1 !important;
     }
 
@@ -117,21 +115,17 @@
             <button onclick="contactWA('upgrade')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white">
               <i class="fas fa-arrow-circle-up"></i> Upgrade Kelas
             </button>
-            <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-blue-400 hover:text-white">
-              <i class="fas fa-info-circle"></i> Info GToG Korea
-            </a>
           </div>
         </nav>
       </div>
-
       <button onclick="logout()" class="mx-6 mb-8 w-[calc(100%-3rem)] py-4 bg-white/5 hover:bg-rose-500/20 rounded-modern text-rose-400 font-bold text-xs uppercase transition-all">LOGOUT</button>
     </aside>
 
     <main class="flex-1 ml-[280px] p-6 md:p-12">
       <div id="content-main">
-        <div id="dashboard-info" class="p-8 bg-[#FDFBF9] border-l-4 border-[#D6C7AE] rounded-r-xl shadow-sm">
-           <h3 class="font-bold text-slate-800 mb-2 italic text-2xl text-center">Annyeonghaseyo!</h3>
-           <p class="text-slate-600 leading-relaxed text-lg text-center">Silahkan pilih menu di sidebar untuk mulai belajar.</p>
+        <div id="dashboard-info" class="p-8 bg-[#FDFBF9] border-l-4 border-[#D6C7AE] rounded-r-xl shadow-sm text-center">
+           <h3 class="font-bold text-slate-800 mb-2 italic text-2xl">Annyeonghaseyo!</h3>
+           <p class="text-slate-600 leading-relaxed text-lg">Silahkan pilih menu di sidebar untuk mulai belajar.</p>
         </div>
 
         <div id="list-container" class="hidden">
@@ -145,7 +139,7 @@
           <button onclick="closeVideo()" class="text-[#8D7B68] hover:text-slate-900 flex items-center gap-2 font-semibold text-lg">
             <i class="fas fa-arrow-left"></i> Kembali ke Daftar
           </button>
-          <span class="text-xs font-bold text-rose-500 animate-pulse"><i class="fas fa-circle"></i> SEDANG BELAJAR</span>
+          <span class="text-xs font-bold text-rose-500 animate-pulse uppercase tracking-widest"><i class="fas fa-circle"></i> Sedang Belajar</span>
         </div>
         <div class="video-container aspect-video">
           <iframe id="videoPlayer" width="100%" height="100%" frameborder="0" allowfullscreen allow="autoplay"></iframe>
@@ -157,27 +151,75 @@
   <script>
     const accessDatabase = {
       "AWEWE21": { name: "Asep", owned: ["Dasar"] },
-      "AMIRA22": { name: "Susi", owned: ["Dasar", "Menengah", "Lanjutan"] }
+      "AMIRA22": { name: "Amira", owned: ["Dasar", "Menengah", "Lanjutan"] }
     };
 
     const classData = {
-      dasar: { title: "Kelas Dasar", icon: "fas fa-graduation-cap text-emerald-600", items: Array.from({length: 15}, (_, i) => `Video Dasar ${i+1}: Materi Hangul`) },
-      menengah: { title: "Kelas Menengah", icon: "fas fa-award text-orange-600", items: Array.from({length: 12}, (_, i) => `Video Menengah ${i+1}: Tata Bahasa`) },
-      lanjutan: { title: "Kelas Lanjutan", icon: "fas fa-star text-blue-600", items: Array.from({length: 10}, (_, i) => `Video Lanjutan ${i+1}: Persiapan EPS-TOPIK`) }
+      dasar: { 
+        title: "Kelas Dasar", 
+        icon: "fas fa-graduation-cap text-emerald-600", 
+        items: [
+          "Pengenalan Huruf Korea", "Vokal Dasar", "Konsonan Dasar", "Vokal Rangkap", 
+          "Konsonan Rangkap", "Penggabungan Huruf", "Aturan Pelafalan", 
+          "Chagi Soge", "Kalimat Kopula", "Kalimat Preposisi", 
+          "Bilangan Sino", "Bilangan Asli", "Pembentukan Kalimat"
+        ] 
+      },
+      menengah: { 
+        title: "Kelas Menengah", 
+        icon: "fas fa-award text-orange-600", 
+        items: [
+          "Kalimat Pernyataan Formal", "Kalimat Pertanyaan Formal", "Kalimat Ajakan", 
+          "Kalimat Perintah", "Kalimat Informal", "Kalimat Negatif", 
+          "Kalimat Larangan", "Kalimat Tenses Sedang", "Kalimat Tenses Ingin", 
+          "Kalimat Tenses Akan", "Kalimat Tenses Lampau"
+        ] 
+      },
+      lanjutan: { 
+        title: "Kelas Lanjutan", 
+        icon: "fas fa-star text-blue-600", 
+        items: [
+          "Akhiran Bisa / Tidak Bisa", "Akhiran Pernah / Tidak Pernah", 
+          "Akhiran Boleh / Tidak Boleh", "Akhiran Harus", "Akhiran Penawaran", 
+          "Akhiran Akan 2", "Kata Sambung Dan, Dengan", 
+          "Kata Sambung Dan, Kemudian", "Kata Sambung Kalau, Jika"
+        ] 
+      }
     };
 
     const moduleData = {
-      materi: { title: "Module Materi", icon: "fas fa-pencil-alt text-blue-600", files: Array.from({length: 15}, (_, i) => `PDF Materi ${i+1}: File Pelajaran`) },
-      listening: { title: "Module Listening", icon: "fas fa-headphones text-purple-600", files: Array.from({length: 15}, (_, i) => `Audio Listening ${i+1}: Latihan`) },
-      soal: { title: "Module Soal", icon: "fas fa-tools text-rose-600", files: Array.from({length: 15}, (_, i) => `Bank Soal ${i+1}: Simulasi EPS`) }
+      materi: { 
+        title: "Module Materi", 
+        icon: "fas fa-pencil-alt text-blue-600", 
+        files: [
+          "Textbook HRDK 2024 Bab 1 - 30", "Textbook HRDK 2024 Bab 31 - 60",
+          "Textbook HRDK 2015 Bab 1 - 30", "Textbook HRDK 2015 Bab 31 - 60",
+          "Module Dasar Gumi Eohakwon", "Kumpulan Kosa Kata",
+          "Kumpulan Kosa Kata (Lawan Kata)", "Kumpulan Kosa Kata (Persamaan Kata)",
+          "Kumpulan Kosa Kata (Yang Berkaitan)", "Bahasa Korea Terpadu 1",
+          "Bahasa Korea Terpadu 2", "Bahasa Korea Terpadu 3",
+          "Bahasa Korea Terpadu 4", "Bahasa Korea Terpadu 5", "Bahasa Korea Terpadu 6"
+        ] 
+      },
+      listening: { 
+        title: "Module Listening", 
+        icon: "fas fa-headphones text-purple-600", 
+        files: [
+          "Audio Listening Textbook HRDK 2024 Bab 1 - 30",
+          "Audio Listening Textbook HRDK 2024 Bab 31 - 60",
+          "Visual Listening 1", "Visual Listening 2", "Visual Listening 3",
+          "Visual Listening 4", "Visual Listening 5"
+        ] 
+      },
+      soal: { title: "Module Soal", icon: "fas fa-tools text-rose-600", files: ["Simulasi TOPIK 1", "Tryout Akbar Sukabumi"] }
     };
 
-    const pdfUrl = "https://drive.google.com/file/d/1yMPXsFCrRS0kKXUTRXpazx5NoP6yBaO6/view?usp=sharing";
     const videoUrl = "https://drive.google.com/file/d/1KspUnWD-wzu4L9LiCMYf7--ksIvMPwl9/preview";
+    const pdfUrl = "https://drive.google.com/file/d/1yMPXsFCrRS0kKXUTRXpazx5NoP6yBaO6/view?usp=sharing";
 
     let currentUser = null;
     let currentCategory = null;
-    let watchedVideos = JSON.parse(localStorage.getItem('gumi_watched_list')) || [];
+    let watchedItems = JSON.parse(localStorage.getItem('gumi_history')) || [];
 
     function checkAccess() {
       const code = document.getElementById('accessCode').value.trim().toUpperCase();
@@ -196,32 +238,19 @@
       const hasAccess = type === 'dasar' || currentUser.owned.includes(type.charAt(0).toUpperCase() + type.slice(1));
       document.getElementById('list-title').innerHTML = `<i class="${data.icon}"></i> ${data.title}`;
       let html = '';
-      
       data.items.forEach((item, index) => {
-        const videoKey = `${type}_${index}`;
-        const isWatched = watchedVideos.includes(videoKey);
-        
-        if (hasAccess) {
-          html += `
-            <div class="list-row cursor-pointer ${isWatched ? 'watched' : ''}" onclick="playVideo('${videoKey}')">
-              <div class="flex items-center gap-3">
-                <i class="fas fa-play-circle ${isWatched ? '' : 'text-emerald-500'}"></i>
-                <span class="font-semibold title-text text-sm">${item}</span>
-              </div>
-              <span class="text-[10px] font-bold ${isWatched ? 'text-slate-400' : 'text-emerald-600 bg-emerald-100'} px-2 py-1 rounded uppercase">
-                ${isWatched ? 'SUDAH DITONTON' : 'Mulai Belajar'}
-              </span>
-            </div>`;
-        } else {
-          html += `
-            <div class="list-row opacity-50">
-              <div class="flex items-center gap-3">
-                <i class="fas fa-lock text-slate-400"></i>
-                <span class="font-semibold text-slate-400 text-sm">${item}</span>
-              </div>
-              <span class="text-[10px] font-bold text-slate-400">TERKUNCI</span>
-            </div>`;
-        }
+        const key = `vid_${type}_${index}`;
+        const isWatched = watchedItems.includes(key);
+        html += `
+          <div class="list-row cursor-pointer ${isWatched ? 'watched' : ''}" onclick="${hasAccess ? `playVideo('${key}')` : ''}">
+            <div class="flex items-center gap-3">
+              <i class="fas ${hasAccess ? 'fa-play-circle text-emerald-500' : 'fa-lock text-slate-400'}"></i>
+              <span class="font-semibold title-text text-sm">${item}</span>
+            </div>
+            <span class="text-[10px] font-bold ${!hasAccess ? 'text-slate-400' : (isWatched ? 'text-slate-400' : 'text-emerald-600 bg-emerald-100')} px-2 py-1 rounded uppercase">
+              ${!hasAccess ? 'Terkunci' : (isWatched ? 'Sudah Ditonton' : 'Mulai')}
+            </span>
+          </div>`;
       });
       document.getElementById('list-items').innerHTML = html;
       document.getElementById('list-container').classList.remove('hidden');
@@ -230,18 +259,21 @@
 
     function showModuleSection(type) {
       resetView();
-      currentCategory = null;
+      currentCategory = type;
       const data = moduleData[type];
       document.getElementById('list-title').innerHTML = `<i class="${data.icon}"></i> ${data.title}`;
       let html = '';
-      data.files.forEach(file => {
+      data.files.forEach((file, index) => {
+        const key = `doc_${type}_${index}`;
+        const isWatched = watchedItems.includes(key);
+        const icon = type === 'listening' ? 'fa-headphones text-purple-500' : 'fa-file-pdf text-rose-500';
         html += `
-          <div class="list-row">
+          <div class="list-row ${isWatched ? 'watched' : ''}">
             <div class="flex items-center gap-3">
-              <i class="fas fa-file-pdf text-rose-500"></i>
-              <span class="font-semibold text-slate-700 text-sm">${file}</span>
+              <i class="fas ${icon}"></i>
+              <span class="font-semibold title-text text-sm">${file}</span>
             </div>
-            <a href="${pdfUrl}" target="_blank" class="text-[10px] font-black text-[#8D7B68] bg-[#D6C7AE]/40 px-3 py-1.5 rounded-lg">DOWNLOAD</a>
+            <a href="${pdfUrl}" target="_blank" onclick="markWatched('${key}')" class="text-[10px] font-black text-[#8D7B68] bg-[#D6C7AE]/40 px-3 py-1.5 rounded-lg">BUKA</a>
           </div>`;
       });
       document.getElementById('list-items').innerHTML = html;
@@ -249,14 +281,17 @@
       document.getElementById('dashboard-info').classList.add('hidden');
     }
 
-    function playVideo(videoKey) {
+    function playVideo(key) {
       document.getElementById('content-main').classList.add('hidden');
       document.getElementById('content-video').classList.remove('hidden');
       document.getElementById('videoPlayer').src = videoUrl;
-      
-      if (!watchedVideos.includes(videoKey)) {
-        watchedVideos.push(videoKey);
-        localStorage.setItem('gumi_watched_list', JSON.stringify(watchedVideos));
+      markWatched(key);
+    }
+
+    function markWatched(key) {
+      if (!watchedItems.includes(key)) {
+        watchedItems.push(key);
+        localStorage.setItem('gumi_history', JSON.stringify(watchedItems));
       }
     }
 
@@ -277,11 +312,6 @@
       document.getElementById('content-video').classList.add('hidden');
       document.getElementById('content-main').classList.remove('hidden');
       document.getElementById('videoPlayer').src = "";
-    }
-
-    function contactWA(type) {
-      let msg = type === 'upgrade' ? 'Halo Admin Gumi, saya ingin Upgrade Kelas.' : 'Halo Admin Gumi, saya mau konsultasi.';
-      window.open(`https://wa.me/628385551800?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function logout() { window.location.reload(); }

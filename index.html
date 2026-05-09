@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    * { font-style: normal !important; }
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
       background-color: #F8FAFC;
@@ -22,18 +21,15 @@
 </head>
 <body class="bg-slate-50">
 
-  <!-- NAVBAR SIMPLIFIED -->
+  <!-- NAVBAR -->
   <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
         <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center text-white text-3xl font-black">가</div>
         <span class="font-bold text-xl tracking-tight text-slate-900">Gumi Eohakwon</span>
       </div>
-
-      <a href="member.html" 
-         class="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-modern hover:bg-emerald-600 transition-all font-semibold text-sm">
-        <i class="fas fa-user-circle"></i>
-        AREA MEMBER
+      <a href="member.html" class="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-modern hover:bg-emerald-600 transition-all font-semibold text-sm">
+        <i class="fas fa-user-circle"></i> AREA MEMBER
       </a>
     </div>
   </nav>
@@ -41,99 +37,126 @@
   <!-- HERO -->
   <section class="hero-bg text-white py-20 md:py-32 text-center">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="inline-block bg-emerald-500 text-white text-xs font-bold px-5 py-2 rounded-modern mb-6 tracking-widest">
-        PROMO TERBATAS
-      </div>
       <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tighter mb-6">
         MAHIR BAHASA KOREA<br>
         <span class="text-emerald-400">DALAM WAKTU SINGKAT</span>
       </h1>
-      <p class="text-lg md:text-xl text-slate-200 mb-8 font-medium px-4">
-        Belajar Hangul, Percakapan, & Tata Bahasa<br>
+      <p class="text-lg md:text-xl text-slate-200 mb-8 font-medium">
+        Belajar Hangul, Percakapan, & Tata Bahasa Secara Mudah & Praktis<br>
         Mulai dari <span class="font-bold text-emerald-400">Rp 149.000</span>
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="daftar.html" 
-           class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg md:text-xl px-10 py-5 rounded-modern transition-all shadow-lg w-full sm:w-auto">
+        <a href="daftar.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg md:text-xl px-10 py-5 rounded-modern transition-all shadow-lg w-full sm:w-auto">
           DAFTAR SEKARANG
         </a>
-        <a href="member.html" 
-           class="inline-block border-2 border-white/80 hover:bg-white hover:text-slate-900 text-white font-bold text-lg md:text-xl px-8 py-5 rounded-modern transition-all w-full sm:w-auto">
+        <a href="member.html" class="inline-block border-2 border-white/80 hover:bg-white hover:text-slate-900 text-white font-bold text-lg md:text-xl px-8 py-5 rounded-modern transition-all w-full sm:w-auto">
           MASUK AREA MEMBER
         </a>
       </div>
-
-      <p class="text-sm text-slate-300 mt-8">✅ Akses Selamanya • ✅ Materi Berkualitas</p>
     </div>
   </section>
 
-  <!-- BENEFIT -->
+  <!-- BENEFIT - Icon Sederhana -->
   <section class="py-16 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-center text-3xl font-bold text-slate-900 mb-10">Kenapa Harus di Gumi Eohakwon?</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center bg-slate-50 p-8 rounded-modern">
-          <div class="text-5xl mb-4">📱</div>
+      <h2 class="text-center text-3xl font-bold text-slate-900 mb-12">Kenapa Harus di Gumi Eohakwon?</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        
+        <div class="text-center">
+          <div class="text-6xl mb-6 text-slate-700">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
           <h3 class="font-bold text-xl mb-2">Praktis & Fleksibel</h3>
           <p class="text-slate-600">Belajar kapan saja via HP atau Laptop.</p>
         </div>
-        <div class="text-center bg-slate-50 p-8 rounded-modern">
-          <div class="text-5xl mb-4">🎯</div>
+
+        <div class="text-center">
+          <div class="text-6xl mb-6 text-slate-700">
+            <i class="fas fa-book-open"></i>
+          </div>
           <h3 class="font-bold text-xl mb-2">Metode Mudah</h3>
           <p class="text-slate-600">Mulai dari nol dengan penjelasan simpel.</p>
         </div>
-        <div class="text-center bg-slate-50 p-8 rounded-modern">
-          <div class="text-5xl mb-4">💰</div>
+
+        <div class="text-center">
+          <div class="text-6xl mb-6 text-slate-700">
+            <i class="fas fa-wallet"></i>
+          </div>
           <h3 class="font-bold text-xl mb-2">Harga Terjangkau</h3>
           <p class="text-slate-600">Kualitas premium dengan harga kompetitif.</p>
         </div>
+
       </div>
-    </div>
-  </section>
-
-  <!-- PAKET PROMO -->
-  <section id="daftar" class="py-16 px-6 bg-slate-900 text-white">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-4">Kelas Dasar Bahasa Korea</h2>
-      <div class="text-5xl font-bold text-emerald-400 mb-2">Rp 149.000</div>
-      <p class="text-slate-400 line-through mb-8">Normal Rp 350.000</p>
-
-      <div class="bg-white/10 rounded-modern p-8 max-w-lg mx-auto">
-        <ul class="space-y-3 text-left text-base">
-          <li class="flex items-center gap-3"><i class="fas fa-check text-emerald-400"></i> 50+ Video Materi</li>
-          <li class="flex items-center gap-3"><i class="fas fa-check text-emerald-400"></i> Modul PDF & Latihan</li>
-          <li class="flex items-center gap-3"><i class="fas fa-check text-emerald-400"></i> Akses Selamanya</li>
-          <li class="flex items-center gap-3"><i class="fas fa-check text-emerald-400"></i> Grup Konsultasi WA</li>
-        </ul>
-      </div>
-
-      <a href="daftar.html" 
-         class="mt-10 inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl px-12 py-5 rounded-modern transition-all">
-        LIHAT SEMUA PAKET
-      </a>
     </div>
   </section>
 
   <!-- TESTIMONI -->
   <section class="py-16 px-6 bg-white">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-center text-3xl font-bold mb-10 text-slate-900">Apa Kata Mereka?</h2>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-slate-50 p-6 rounded-modern">
-          <p class="italic">"Dalam 2 minggu sudah bisa baca Hangul dan percakapan sederhana."</p>
-          <div class="mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 bg-slate-300 rounded-full"></div>
-            <div><strong>Asep Sunandar</strong><br><span class="text-sm text-emerald-600">Sudah Kerja di Korea</span></div>
+      <h2 class="text-center text-3xl font-bold mb-12 text-slate-900">Apa Kata Mereka?</h2>
+      
+      <div class="overflow-hidden" id="testimonialSlider">
+        <div class="flex transition-transform duration-500" id="slides">
+          
+          <!-- Slide 1 -->
+          <div class="min-w-full grid md:grid-cols-2 gap-6 px-4">
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Dalam 2 minggu sudah bisa baca Hangul dan percakapan sederhana."</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Asep Sunandar</strong><br><span class="text-sm text-emerald-600">Sudah Kerja di Korea</span></div>
+              </div>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Harganya murah tapi materinya bagus. Cocok buat yang sibuk."</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Indah Permata</strong><br><span class="text-sm text-emerald-600">Member Baru</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 & 3 tetap sama seperti sebelumnya -->
+          <div class="min-w-full grid md:grid-cols-2 gap-6 px-4">
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Kelas Live Zoom-nya interaktif dan guru sangat sabar."</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Rizky Pratama</strong><br><span class="text-sm text-emerald-600">Mahasiswa</span></div>
+              </div>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Terima kasih Gumi, sekarang saya lebih percaya diri."</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Sari Wulandari</strong><br><span class="text-sm text-emerald-600">Karyawan</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="min-w-full grid md:grid-cols-2 gap-6 px-4">
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Modulnya lengkap dan mudah diikuti."</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/67.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Dimas Saputra</strong><br><span class="text-sm text-emerald-600">Freelancer</span></div>
+              </div>
+            </div>
+            <div class="bg-slate-50 p-6 rounded-modern">
+              <p class="italic">"Best choice buat yang mau belajar Korea!"</p>
+              <div class="mt-6 flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-12 h-12 rounded-full object-cover">
+                <div><strong>Putri Ayu</strong><br><span class="text-sm text-emerald-600">Guru</span></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="bg-slate-50 p-6 rounded-modern">
-          <p class="italic">"Harganya murah tapi materinya bagus. Cocok buat yang sibuk."</p>
-          <div class="mt-6 flex items-center gap-3">
-            <div class="w-10 h-10 bg-slate-300 rounded-full"></div>
-            <div><strong>Indah Permata</strong><br><span class="text-sm text-emerald-600">Member Baru</span></div>
-          </div>
-        </div>
+      </div>
+
+      <div class="flex justify-center gap-4 mt-8">
+        <button onclick="prevSlide()" class="bg-slate-200 hover:bg-slate-300 w-10 h-10 rounded-full flex items-center justify-center"><i class="fas fa-chevron-left"></i></button>
+        <button onclick="nextSlide()" class="bg-slate-200 hover:bg-slate-300 w-10 h-10 rounded-full flex items-center justify-center"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -142,8 +165,7 @@
   <section class="bg-slate-900 py-16 text-center text-white">
     <div class="max-w-2xl mx-auto px-6">
       <h2 class="text-3xl font-bold mb-6">Siap Mulai Perjalanan ke Korea?</h2>
-      <a href="daftar.html" 
-         class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl px-12 py-5 rounded-modern transition-all">
+      <a href="daftar.html" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xl px-12 py-5 rounded-modern transition-all">
         DAFTAR SEKARANG
       </a>
     </div>
@@ -153,5 +175,23 @@
     <p>© 2026 Gumi Eohakwon Sukabumi • All Rights Reserved</p>
   </footer>
 
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 3;
+
+    function showSlide(n) {
+      document.getElementById('slides').style.transform = `translateX(-${n * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+  </script>
 </body>
 </html>

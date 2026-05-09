@@ -3,30 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Member | Gumi Eohakwon</title>
+  <title>Member Area | Gumi Eohakwon</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
-    /* No Italic Global */
     * { font-style: normal !important; }
-    
-    body { 
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: #FDFBF0; 
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #FDFBF0;
       color: #1E293B;
     }
-
-    .bg-navy { background-color: #0F172A; }
-    
-    .sidebar-active { 
-      background-color: #D9A000; 
-      color: white !important;
-      border-radius: 1rem;
-    }
-
-    .rounded-pro { border-radius: 2rem !important; }
+    .bg-navy { background-color: #1E293B; }
+    .rounded-modern { border-radius: 1.5rem !important; }
 
     .submenu-container {
       max-height: 0;
@@ -34,158 +24,258 @@
       transition: all 0.4s ease;
     }
     .submenu-container.open {
-      max-height: 500px;
+      max-height: 800px;
     }
 
-    /* Mobile Sidebar Overlay */
-    #sidebar {
-      transition: transform 0.3s ease-in-out;
+    .lesson-item {
+      transition: all 0.2s;
     }
-
-    @media (max-width: 768px) {
-      #sidebar {
-        transform: translateX(-100%);
-      }
-      #sidebar.show {
-        transform: translateX(0);
-      }
+    .lesson-item:hover {
+      background-color: #334155;
+      color: white;
+    }
+    .locked {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-  <!-- ================= LAYAR LOGIN ================= -->
-  <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-navy p-6 z-[200] relative">
-    <div class="max-w-md w-full bg-[#FDFBF0] rounded-pro shadow-2xl p-10 text-center border-b-8 border-amber-600">
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-navy p-6">
+    <div class="max-w-md w-full bg-white rounded-modern shadow-2xl p-10 text-center border-b-8 border-amber-600">
       <div class="w-20 h-20 mx-auto bg-navy rounded-2xl flex items-center justify-center text-white text-4xl font-black mb-8">가</div>
-      <h1 class="text-2xl font-black text-navy uppercase tracking-tighter mb-2">Member Login</h1>
-      <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mb-10">Gumi Eohakwon Sukabumi</p>
-
-      <div class="space-y-4">
-        <input type="password" id="accessCode" placeholder="KODE AKSES" class="w-full px-8 py-5 bg-white border-2 border-slate-100 rounded-2xl focus:border-amber-500 outline-none text-center text-xl font-bold tracking-[0.3em] uppercase">
-        <button onclick="checkAccess()" class="w-full bg-navy text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-amber-600 transition-all shadow-lg">MASUK</button>
+      <h1 class="text-3xl font-black text-navy tracking-tighter">Member Area</h1>
+      <p class="text-slate-500 font-bold text-sm mt-2">Gumi Eohakwon Sukabumi</p>
+      
+      <div class="mt-10 space-y-4">
+        <input type="password" id="accessCode" placeholder="MASUKKAN KODE AKSES" 
+               class="w-full px-8 py-6 bg-slate-50 border border-slate-200 rounded-modern focus:border-amber-500 outline-none text-center text-lg font-bold tracking-widest">
+        <button onclick="checkAccess()" 
+                class="w-full py-6 bg-navy text-white rounded-modern font-black text-sm uppercase tracking-widest hover:bg-amber-600 transition-all">
+          MASUK KE DASHBOARD
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= AREA MEMBER UTAMA ================= -->
+  <!-- MAIN DASHBOARD -->
   <div id="memberContent" class="hidden flex min-h-screen">
-
-    <!-- Header Mobile (Hanya muncul di HP) -->
-    <header class="md:hidden fixed top-0 w-full bg-navy text-white p-4 flex justify-between items-center z-[60] shadow-xl">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center text-navy font-black italic">가</div>
-        <span class="font-black uppercase text-xs tracking-tighter">Gumi Area</span>
-      </div>
-      <button onclick="toggleSidebar()" class="text-2xl p-2"><i class="fas fa-bars"></i></button>
-    </header>
-
-    <!-- SIDEBAR NAVY -->
-    <aside id="sidebar" class="w-72 bg-navy p-6 flex flex-col text-white fixed h-full z-[70] overflow-y-auto">
-      <!-- Close button mobile -->
-      <button onclick="toggleSidebar()" class="md:hidden absolute top-6 right-6 text-xl text-slate-400"><i class="fas fa-times"></i></button>
-
-      <div class="flex items-center gap-3 mb-10 border-b border-white/10 pb-6 mt-4 md:mt-0">
-        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-navy text-xl font-black shadow-lg">가</div>
-        <div class="leading-none text-left">
-          <span class="font-black uppercase tracking-tighter block">Gumi Area</span>
-          <span class="text-[8px] font-bold text-amber-500 uppercase tracking-widest">Premium System</span>
-        </div>
-      </div>
-
-      <nav class="flex-grow space-y-2">
-        <button onclick="showContent('dashboard'); toggleSidebar();" class="sidebar-active w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase tracking-widest text-left">
-          <i class="fas fa-th-large"></i> Overview
-        </button>
-
-        <!-- Materi Kursus -->
-        <div class="pt-2">
-          <button onclick="toggleSub('submenu-materi', 'chevron-materi')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
-            <div class="flex items-center gap-4"><i class="fas fa-book"></i> Materi Kursus</div>
-            <i id="chevron-materi" class="fas fa-chevron-right text-[10px]"></i>
-          </button>
-          <div id="submenu-materi" class="submenu-container ml-4 space-y-1">
-            <button onclick="showContent('dasar'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Dasar</button>
-            <button onclick="showContent('lanjutan'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Lanjutan</button>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-72 bg-navy text-white fixed h-full z-50 overflow-y-auto">
+      <div class="p-6">
+        <div class="flex items-center gap-3 mb-12">
+          <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-navy text-2xl font-black">가</div>
+          <div>
+            <span class="font-black text-xl tracking-tighter">Gumi Area</span>
+            <p class="text-amber-500 text-xs font-bold">PREMIUM SYSTEM</p>
           </div>
         </div>
 
-        <!-- Pelengkap -->
-        <div class="pt-2">
-          <button onclick="toggleSub('submenu-pelengkap', 'chevron-pelengkap')" class="w-full flex items-center justify-between px-5 py-4 font-bold text-xs uppercase text-slate-400 hover:text-white transition-all">
-            <div class="flex items-center gap-4"><i class="fas fa-folder-open"></i> Pelengkap</div>
-            <i id="chevron-pelengkap" class="fas fa-chevron-right text-[10px]"></i>
+        <nav class="space-y-1">
+          <button onclick="showContent('dashboard')" 
+                  class="sidebar-active w-full flex items-center gap-4 px-5 py-4 font-bold text-sm uppercase tracking-widest text-left rounded-modern">
+            <i class="fas fa-th-large"></i> Overview
           </button>
-          <div id="submenu-pelengkap" class="submenu-container ml-4 space-y-1">
-            <button onclick="showContent('module'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Modul PDF</button>
-            <button onclick="showContent('audio'); toggleSidebar();" class="w-full text-left px-10 py-3 text-[10px] font-bold uppercase text-slate-500">Audio Listening</button>
+
+          <!-- Kelas Dasar -->
+          <div>
+            <button onclick="toggleSub('submenu-dasar', 'chevron-dasar')" 
+                    class="w-full flex items-center justify-between px-5 py-4 font-bold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Dasar</div>
+              <i id="chevron-dasar" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-dasar" class="submenu-container ml-6 space-y-1"></div>
           </div>
-        </div>
 
-        <!-- Link Luar -->
-        <div class="pt-6 border-t border-white/10 mt-6 space-y-2 text-left">
-          <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-blue-400">
-            <i class="fas fa-info-circle"></i> Info GToG Korea
-          </a>
-          <button onclick="contactWA('konsultasi'); toggleSidebar();" class="w-full flex items-center gap-4 px-5 py-4 font-bold text-xs uppercase text-emerald-400">
-            <i class="fas fa-comments"></i> Konsultasi Admin
-          </button>
-        </div>
-      </nav>
+          <!-- Kelas Menengah -->
+          <div>
+            <button onclick="toggleSub('submenu-menengah', 'chevron-menengah')" 
+                    class="w-full flex items-center justify-between px-5 py-4 font-bold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Menengah</div>
+              <i id="chevron-menengah" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-menengah" class="submenu-container ml-6 space-y-1"></div>
+          </div>
 
-      <button onclick="logout()" class="mt-auto py-4 bg-white/5 rounded-xl text-rose-500 font-bold text-[10px] uppercase tracking-widest">LOGOUT</button>
+          <!-- Kelas Lanjutan -->
+          <div>
+            <button onclick="toggleSub('submenu-lanjutan', 'chevron-lanjutan')" 
+                    class="w-full flex items-center justify-between px-5 py-4 font-bold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Lanjutan</div>
+              <i id="chevron-lanjutan" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-lanjutan" class="submenu-container ml-6 space-y-1"></div>
+          </div>
+
+          <!-- Modul dan Bahan Materi -->
+          <div class="pt-4">
+            <button onclick="toggleSub('submenu-modul', 'chevron-modul')" 
+                    class="w-full flex items-center justify-between px-5 py-4 font-bold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-folder-open"></i> Module Materi</div>
+              <i id="chevron-modul" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-modul" class="submenu-container ml-6 space-y-1 text-sm"></div>
+          </div>
+
+          <!-- Pelengkap -->
+          <div class="pt-8 border-t border-white/10 mt-8 space-y-2">
+            <button onclick="contactWA('konsultasi')" 
+                    class="w-full flex items-center gap-4 px-5 py-4 font-bold text-sm uppercase text-emerald-400 hover:text-white">
+              <i class="fas fa-comments"></i> Konsultasi Admin
+            </button>
+            <button onclick="contactWA('upgrade')" 
+                    class="w-full flex items-center gap-4 px-5 py-4 font-bold text-sm uppercase text-amber-400 hover:text-white">
+              <i class="fas fa-arrow-up"></i> Upgrade Kelas
+            </button>
+            <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank"
+               class="w-full flex items-center gap-4 px-5 py-4 font-bold text-sm uppercase text-blue-400 hover:text-white">
+              <i class="fas fa-info-circle"></i> Info GToG Korea
+            </a>
+          </div>
+        </nav>
+      </div>
+
+      <button onclick="logout()" 
+              class="mx-6 mb-8 w-[calc(100%-3rem)] py-4 bg-white/10 hover:bg-white/20 rounded-modern text-rose-400 font-bold text-xs uppercase tracking-widest">
+        LOGOUT
+      </button>
     </aside>
 
-    <!-- Overlay Mobile (Hanya muncul di HP saat sidebar buka) -->
-    <div id="overlay" onclick="toggleSidebar()" class="hidden fixed inset-0 bg-black/50 z-[65] md:hidden"></div>
+    <!-- Main Content -->
+    <main class="flex-1 md:ml-72 p-8 md:p-12">
+      <!-- Dashboard -->
+      <div id="content-dashboard">
+        <h1 class="text-4xl font-black text-navy">Selamat Datang, <span id="nameDisplay" class="text-amber-600"></span></h1>
+        <p class="text-slate-600 mt-3 text-lg">Paket Akses: <span id="statusDisplay" class="font-bold text-navy"></span></p>
+      </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 md:ml-72 p-6 md:p-16 pt-24 md:pt-16">
-      <div id="content-dashboard" class="space-y-8 text-left">
-        <h2 class="text-3xl md:text-4xl font-black text-navy uppercase tracking-tighter border-l-8 border-amber-500 pl-6">Student Overview</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-white p-8 rounded-pro border-b-4 border-navy shadow-sm">
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Nama Siswa</p>
-            <p id="nameDisplay" class="text-2xl font-black text-navy uppercase">-</p>
-          </div>
-          <div class="bg-white p-8 rounded-pro border-b-4 border-amber-500 shadow-sm">
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Paket Akses</p>
-            <p id="statusDisplay" class="text-xl font-black text-amber-600 uppercase">-</p>
+      <!-- Video Player (Tanpa Border Radius) -->
+      <div id="content-video" class="hidden">
+        <button onclick="kembaliDashboard()" 
+                class="mb-6 text-navy hover:text-amber-600 flex items-center gap-2 font-bold text-lg">
+          ← Kembali ke Daftar Materi
+        </button>
+        <div class="bg-white shadow-2xl overflow-hidden">
+          <div class="aspect-video bg-black">
+            <iframe id="videoPlayer" width="100%" height="100%" frameborder="0" allowfullscreen allow="autoplay"></iframe>
           </div>
         </div>
       </div>
-      
-      <!-- Halaman Materi (Placeholder) -->
-      <div id="content-dasar" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Materi Dasar</h2></div>
-      <div id="content-lanjutan" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Materi Lanjutan</h2></div>
-      <div id="content-module" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Modul Belajar</h2></div>
-      <div id="content-audio" class="hidden text-left"><h2 class="text-3xl font-black text-navy uppercase">Audio Listening</h2></div>
     </main>
   </div>
 
   <script>
     const accessDatabase = {
-      "AWEWE21":  { name: "Asep",  owned: ["Dasar"] },
-      "SAWER09":  { name: "Amir",  owned: ["Advance"] },
-      "AMIRA22":  { name: "Susi",  owned: ["Dasar", "Lanjutan"] }
+      "AWEWE21": { name: "Asep", owned: ["Dasar"] },
+      "SAWER09": { name: "Amir", owned: ["Lanjutan"] },
+      "AMIRA22": { name: "Susi", owned: ["Dasar", "Menengah", "Lanjutan"] },
+      "BULAN77": { name: "Indra", owned: ["Dasar", "Menengah"] },
+      "MALAM22": { name: "Indah", owned: ["Menengah"] }
     };
+
+    const videoSample = "https://drive.google.com/file/d/1KspUnWD-wzu4L9LiCMYf7--ksIvMPwl9/preview";
+
+    const materi = {
+      dasar: [
+        { id: 1, title: "1. Pengenalan Hangul", url: videoSample },
+        { id: 2, title: "2. Pengucapan Dasar", url: videoSample },
+        { id: 3, title: "3. Salam dan Perkenalan Diri", url: videoSample }
+      ],
+      menengah: [
+        { id: 4, title: "1. Tata Bahasa Menengah", url: videoSample },
+        { id: 5, title: "2. Percakapan Sehari-hari", url: videoSample },
+        { id: 6, title: "3. Angka dan Waktu", url: videoSample }
+      ],
+      lanjutan: [
+        { id: 7, title: "1. Kalimat Kompleks", url: videoSample },
+        { id: 8, title: "2. Bahasa Formal & Informal", url: videoSample },
+        { id: 9, title: "3. Percakapan Bisnis", url: videoSample }
+      ]
+    };
+
+    let currentUser = null;
 
     function checkAccess() {
       const code = document.getElementById('accessCode').value.trim().toUpperCase();
-      if (accessDatabase[code]) {
+      const user = accessDatabase[code];
+      
+      if (user) {
+        currentUser = user;
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('memberContent').classList.remove('hidden');
-        document.getElementById('nameDisplay').innerText = accessDatabase[code].name;
-        document.getElementById('statusDisplay').innerText = accessDatabase[code].owned.join(" & ");
-      } else { alert("KODE AKSES SALAH!"); }
+        
+        document.getElementById('nameDisplay').innerText = user.name;
+        document.getElementById('statusDisplay').innerText = user.owned.join(" & ");
+        renderMateri();
+      } else {
+        alert("KODE AKSES SALAH!");
+      }
     }
 
-    function toggleSidebar() {
-      const sb = document.getElementById('sidebar');
-      const ov = document.getElementById('overlay');
-      sb.classList.toggle('show');
-      ov.classList.toggle('hidden');
+    function renderMateri() {
+      const owned = currentUser.owned;
+
+      // Dasar
+      let htmlDasar = '';
+      materi.dasar.forEach(item => {
+        htmlDasar += `<div onclick="playVideo(${item.id})" class="lesson-item px-5 py-3 cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+      });
+      document.getElementById('submenu-dasar').innerHTML = htmlDasar;
+
+      // Menengah
+      let htmlMenengah = '';
+      const hasMenengah = owned.includes("Menengah");
+      materi.menengah.forEach(item => {
+        if (hasMenengah) {
+          htmlMenengah += `<div onclick="playVideo(${item.id})" class="lesson-item px-5 py-3 cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+        } else {
+          htmlMenengah += `<div class="lesson-item locked px-5 py-3 rounded-xl text-slate-500 flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title} <span class="text-[10px]">(Terkunci)</span></div>`;
+        }
+      });
+      document.getElementById('submenu-menengah').innerHTML = htmlMenengah;
+
+      // Lanjutan
+      let htmlLanjutan = '';
+      const hasLanjutan = owned.includes("Lanjutan");
+      materi.lanjutan.forEach(item => {
+        if (hasLanjutan) {
+          htmlLanjutan += `<div onclick="playVideo(${item.id})" class="lesson-item px-5 py-3 cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+        } else {
+          htmlLanjutan += `<div class="lesson-item locked px-5 py-3 rounded-xl text-slate-500 flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title} <span class="text-[10px]">(Terkunci)</span></div>`;
+        }
+      });
+      document.getElementById('submenu-lanjutan').innerHTML = htmlLanjutan;
+
+      // Modul & Bahan Materi (Contoh)
+      let htmlModul = `
+        <div class="px-5 py-3 text-slate-400 cursor-pointer hover:text-white">• Modul PDF Dasar.pdf</div>
+        <div class="px-5 py-3 text-slate-400 cursor-pointer hover:text-white">• Modul PDF Menengah.pdf</div>
+        <div class="px-5 py-3 text-slate-400 cursor-pointer hover:text-white">• Latihan Soal EPS-TOPIK.pdf</div>
+        <div class="px-5 py-3 text-slate-400 cursor-pointer hover:text-white">• Kosakata Harian.pdf</div>
+      `;
+      document.getElementById('submenu-modul').innerHTML = htmlModul;
+    }
+
+    function playVideo(id) {
+      let video = null;
+      Object.values(materi).forEach(level => {
+        const found = level.find(v => v.id === id);
+        if (found) video = found;
+      });
+
+      if (video) {
+        document.getElementById('content-dashboard').classList.add('hidden');
+        document.getElementById('content-video').classList.remove('hidden');
+        document.getElementById('videoPlayer').src = video.url;
+      }
+    }
+
+    function kembaliDashboard() {
+      document.getElementById('content-video').classList.add('hidden');
+      document.getElementById('content-dashboard').classList.remove('hidden');
+      document.getElementById('videoPlayer').src = '';
     }
 
     function toggleSub(menuId, iconId) {
@@ -195,14 +285,20 @@
       icon.style.transform = menu.classList.contains('open') ? 'rotate(90deg)' : 'rotate(0deg)';
     }
 
-    function showContent(id) {
-      const sections = ['dashboard', 'dasar', 'lanjutan', 'module', 'audio'];
-      sections.forEach(sec => document.getElementById('content-' + sec).classList.add('hidden'));
-      document.getElementById('content-' + id).classList.remove('hidden');
+    function showContent(page) {
+      if (page === 'dashboard') kembaliDashboard();
     }
 
-    function logout() { window.location.reload(); }
-    function contactWA(type) { window.open(`https://wa.me/628385551800?text=Halo Admin Gumi, saya mau tanya ${type}`, '_blank'); }
+    function contactWA(type) {
+      let message = type === 'konsultasi' 
+        ? `Halo Admin Gumi, saya mau konsultasi. Nama saya ${currentUser.name}.` 
+        : `Halo Admin Gumi, saya ingin Upgrade Kelas. Nama saya ${currentUser.name}. Paket saat ini: ${currentUser.owned.join(" & ")}`;
+      window.open(`https://wa.me/628385551800?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function logout() {
+      window.location.reload();
+    }
   </script>
 </body>
 </html>

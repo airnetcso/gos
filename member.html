@@ -19,40 +19,33 @@
     .submenu-container {
       max-height: 0;
       overflow: hidden;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
     .submenu-container.open {
-      max-height: 800px;
+      max-height: 900px;
     }
 
+    /* Submenu lebih rapat */
     .lesson-item {
       transition: all 0.2s;
-      font-size: 0.85rem;
-      padding: 0.55rem 1.25rem;
+      font-size: 0.83rem;
+      padding: 0.42rem 1.25rem;
       margin-bottom: 1px;
     }
     .lesson-item:hover {
       background-color: #1E293B;
       color: white;
     }
+    .lesson-unlocked {
+      color: #10b981;
+      font-weight: 500;
+    }
+    .lesson-locked {
+      color: #64748b;
+    }
 
     #videoPlayer {
       border-radius: 0 !important;
-    }
-
-    /* Responsif untuk HP (Priority Landscape) */
-    @media (max-width: 768px) {
-      #sidebar {
-        width: 100%;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-      #sidebar.open {
-        transform: translateX(0);
-      }
-      main {
-        margin-left: 0 !important;
-      }
     }
   </style>
 </head>
@@ -78,33 +71,27 @@
 
   <!-- MAIN DASHBOARD -->
   <div id="memberContent" class="hidden flex min-h-screen">
-
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-80 bg-slate-900 text-white fixed h-full z-50 overflow-y-auto md:translate-x-0 transition-transform">
+    <aside id="sidebar" class="w-80 bg-slate-900 text-white fixed h-full z-50 overflow-y-auto">
       <div class="p-6">
-        <div class="flex items-center justify-between mb-12">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-900 text-2xl font-black">가</div>
-            <div>
-              <span class="font-bold text-xl tracking-tight">Gumi Area</span>
-              <p class="text-emerald-400 text-xs font-bold">PREMIUM SYSTEM</p>
-            </div>
+        <div class="flex items-center gap-3 mb-10">
+          <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-900 text-2xl font-black">가</div>
+          <div>
+            <span class="font-bold text-xl tracking-tight">Gumi Area</span>
+            <p class="text-emerald-400 text-xs font-bold">PREMIUM SYSTEM</p>
           </div>
-          <button onclick="toggleSidebar()" class="md:hidden text-white text-2xl">
-            <i class="fas fa-times"></i>
-          </button>
         </div>
 
-        <nav class="space-y-1">
+        <nav class="space-y-0.5">
           <button onclick="showContent('dashboard')" 
-                  class="w-full flex items-center gap-4 px-5 py-4 font-semibold text-sm uppercase tracking-widest text-left rounded-modern hover:bg-slate-800">
+                  class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold text-sm uppercase tracking-widest text-left rounded-modern hover:bg-slate-800">
             <i class="fas fa-th-large"></i> Overview
           </button>
 
           <!-- Kelas Dasar -->
           <div>
             <button onclick="toggleSub('submenu-dasar', 'chevron-dasar')" 
-                    class="w-full flex items-center justify-between px-5 py-4 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
               <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Dasar</div>
               <i id="chevron-dasar" class="fas fa-chevron-right"></i>
             </button>
@@ -114,7 +101,7 @@
           <!-- Kelas Menengah -->
           <div>
             <button onclick="toggleSub('submenu-menengah', 'chevron-menengah')" 
-                    class="w-full flex items-center justify-between px-5 py-4 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
               <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Menengah</div>
               <i id="chevron-menengah" class="fas fa-chevron-right"></i>
             </button>
@@ -124,62 +111,71 @@
           <!-- Kelas Lanjutan -->
           <div>
             <button onclick="toggleSub('submenu-lanjutan', 'chevron-lanjutan')" 
-                    class="w-full flex items-center justify-between px-5 py-4 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
               <div class="flex items-center gap-4"><i class="fas fa-book"></i> Kelas Lanjutan</div>
               <i id="chevron-lanjutan" class="fas fa-chevron-right"></i>
             </button>
             <div id="submenu-lanjutan" class="submenu-container ml-6 space-y-[1px]"></div>
           </div>
 
-          <!-- Module Materi -->
-          <div class="pt-4">
-            <button onclick="toggleSub('submenu-modul', 'chevron-modul')" 
-                    class="w-full flex items-center justify-between px-5 py-4 font-semibold text-sm uppercase text-slate-300 hover:text-white">
-              <div class="flex items-center gap-4"><i class="fas fa-folder-open"></i> Module Materi</div>
-              <i id="chevron-modul" class="fas fa-chevron-right"></i>
+          <!-- Module Latihan -->
+          <div>
+            <button onclick="toggleSub('submenu-latihan', 'chevron-latihan')" 
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-pencil-alt"></i> Module Latihan</div>
+              <i id="chevron-latihan" class="fas fa-chevron-right"></i>
             </button>
-            <div id="submenu-modul" class="submenu-container ml-6 space-y-[1px] text-sm"></div>
+            <div id="submenu-latihan" class="submenu-container ml-6 space-y-[1px]"></div>
           </div>
 
-          <!-- Pelengkap -->
-          <div class="pt-8 border-t border-white/10 mt-8 space-y-2">
-            <button onclick="contactWA('konsultasi')" 
-                    class="w-full flex items-center gap-4 px-5 py-4 font-semibold text-sm uppercase text-emerald-400 hover:text-white">
+          <!-- Module Listening -->
+          <div>
+            <button onclick="toggleSub('submenu-listening', 'chevron-listening')" 
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-headphones"></i> Module Listening</div>
+              <i id="chevron-listening" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-listening" class="submenu-container ml-6 space-y-[1px]"></div>
+          </div>
+
+          <!-- Module Pendukung -->
+          <div>
+            <button onclick="toggleSub('submenu-pendukung', 'chevron-pendukung')" 
+                    class="w-full flex items-center justify-between px-5 py-3.5 font-semibold text-sm uppercase text-slate-300 hover:text-white">
+              <div class="flex items-center gap-4"><i class="fas fa-tools"></i> Module Pendukung</div>
+              <i id="chevron-pendukung" class="fas fa-chevron-right"></i>
+            </button>
+            <div id="submenu-pendukung" class="submenu-container ml-6 space-y-[1px]"></div>
+          </div>
+
+          <div class="pt-6 border-t border-white/10 mt-6 space-y-1">
+            <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold text-sm uppercase text-emerald-400 hover:text-white">
               <i class="fas fa-comments"></i> Konsultasi Admin
             </button>
-            <button onclick="contactWA('upgrade')" 
-                    class="w-full flex items-center gap-4 px-5 py-4 font-semibold text-sm uppercase text-emerald-400 hover:text-white">
+            <button onclick="contactWA('upgrade')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold text-sm uppercase text-emerald-400 hover:text-white">
               <i class="fas fa-arrow-up"></i> Upgrade Kelas
             </button>
-            <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank"
-               class="w-full flex items-center gap-4 px-5 py-4 font-semibold text-sm uppercase text-blue-400 hover:text-white">
+            <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold text-sm uppercase text-blue-400 hover:text-white">
               <i class="fas fa-info-circle"></i> Info GToG Korea
             </a>
           </div>
         </nav>
       </div>
 
-      <button onclick="logout()" 
-              class="mx-6 mb-8 w-[calc(100%-3rem)] py-4 bg-white/10 hover:bg-white/20 rounded-modern text-rose-400 font-bold text-xs uppercase tracking-widest">
+      <button onclick="logout()" class="mx-6 mb-8 w-[calc(100%-3rem)] py-4 bg-white/10 hover:bg-white/20 rounded-modern text-rose-400 font-bold text-xs uppercase tracking-widest">
         LOGOUT
       </button>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 md:ml-80 p-6 md:p-12">
-      <!-- Hamburger Button untuk HP -->
-      <button onclick="toggleSidebar()" class="md:hidden mb-6 text-slate-700 hover:text-slate-900">
-        <i class="fas fa-bars text-2xl"></i>
-      </button>
-
       <div id="content-dashboard">
         <h1 class="text-4xl font-bold text-slate-900">Selamat Datang, <span id="nameDisplay" class="text-emerald-600"></span></h1>
         <p class="text-slate-600 mt-3 text-lg">Paket Akses: <span id="statusDisplay" class="font-semibold text-slate-900"></span></p>
       </div>
 
       <div id="content-video" class="hidden">
-        <button onclick="kembaliDashboard()" 
-                class="mb-6 text-slate-600 hover:text-emerald-600 flex items-center gap-2 font-semibold text-lg">
+        <button onclick="kembaliDashboard()" class="mb-6 text-slate-600 hover:text-emerald-600 flex items-center gap-2 font-semibold text-lg">
           ← Kembali ke Daftar Materi
         </button>
         <div class="bg-white shadow-2xl overflow-hidden">
@@ -204,32 +200,32 @@
 
     const materi = {
       dasar: [
-        { id: 1, title: "1. Pengenalan Huruf Hangul", url: videoSample },
-        { id: 2, title: "2. Vokal Dasar", url: videoSample },
-        { id: 3, title: "3. Konsonan Dasar", url: videoSample },
-        { id: 4, title: "4. Vokal Rangkap", url: videoSample },
-        { id: 5, title: "5. Penggabungan Huruf", url: videoSample },
-        { id: 6, title: "6. Kalimat Kopula", url: videoSample },
-        { id: 7, title: "7. Kalimat Preposisi", url: videoSample },
-        { id: 8, title: "8. Chagi Soge (Perkenalan Diri)", url: videoSample },
-        { id: 9, title: "9. Bilangan", url: videoSample },
-        { id: 10, title: "10. Perubahan Kalimat", url: videoSample }
+        { id: 1, title: "1. Pengenalan Huruf Hangul" },
+        { id: 2, title: "2. Vokal Dasar" },
+        { id: 3, title: "3. Konsonan Dasar" },
+        { id: 4, title: "4. Vokal Rangkap" },
+        { id: 5, title: "5. Penggabungan Huruf" },
+        { id: 6, title: "6. Kalimat Kopula" },
+        { id: 7, title: "7. Kalimat Preposisi" },
+        { id: 8, title: "8. Chagi Soge (Perkenalan Diri)" },
+        { id: 9, title: "9. Bilangan" },
+        { id: 10, title: "10. Perubahan Kalimat" }
       ],
       menengah: [
-        { id: 11, title: "1. Kalimat Pernyataan Formal", url: videoSample },
-        { id: 12, title: "2. Kalimat Pertanyaan Formal", url: videoSample },
-        { id: 13, title: "3. Kalimat Ajakan", url: videoSample },
-        { id: 14, title: "4. Kalimat Perintah", url: videoSample },
-        { id: 15, title: "5. Kalimat Informal", url: videoSample },
-        { id: 16, title: "6. Kalimat Negatif", url: videoSample },
-        { id: 17, title: "7. Kalimat Larangan", url: videoSample },
-        { id: 18, title: "8. Tenses Sedang", url: videoSample },
-        { id: 19, title: "9. Tenses Ingin", url: videoSample },
-        { id: 20, title: "10. Tenses Akan", url: videoSample },
-        { id: 21, title: "11. Tenses Lampau", url: videoSample }
+        { id: 11, title: "1. Kalimat Pernyataan Formal" },
+        { id: 12, title: "2. Kalimat Pertanyaan Formal" },
+        { id: 13, title: "3. Kalimat Ajakan" },
+        { id: 14, title: "4. Kalimat Perintah" },
+        { id: 15, title: "5. Kalimat Informal" },
+        { id: 16, title: "6. Kalimat Negatif" },
+        { id: 17, title: "7. Kalimat Larangan" },
+        { id: 18, title: "8. Tenses Sedang" },
+        { id: 19, title: "9. Tenses Ingin" },
+        { id: 20, title: "10. Tenses Akan" },
+        { id: 21, title: "11. Tenses Lampau" }
       ],
       lanjutan: [
-        { id: 22, title: "1. Materi Lanjutan (Coming Soon)", url: videoSample }
+        { id: 22, title: "1. Materi Lanjutan (Coming Soon)" }
       ]
     };
 
@@ -243,6 +239,7 @@
         currentUser = user;
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('memberContent').classList.remove('hidden');
+        
         document.getElementById('nameDisplay').innerText = user.name;
         document.getElementById('statusDisplay').innerText = user.owned.join(" & ");
         renderMateri();
@@ -254,55 +251,65 @@
     function renderMateri() {
       const owned = currentUser.owned;
 
+      // Kelas Dasar
       let htmlDasar = '';
       materi.dasar.forEach(item => {
-        htmlDasar += `<div onclick="playVideo(${item.id})" class="lesson-item cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+        htmlDasar += `<div onclick="playVideo(${item.id})" class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-play text-xs"></i> ${item.title}</div>`;
       });
       document.getElementById('submenu-dasar').innerHTML = htmlDasar;
 
+      // Kelas Menengah
       let htmlMenengah = '';
       const hasMenengah = owned.includes("Menengah");
       materi.menengah.forEach(item => {
         if (hasMenengah) {
-          htmlMenengah += `<div onclick="playVideo(${item.id})" class="lesson-item cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+          htmlMenengah += `<div onclick="playVideo(${item.id})" class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-play text-xs"></i> ${item.title}</div>`;
         } else {
-          htmlMenengah += `<div class="lesson-item rounded-xl text-slate-500 flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title} <span class="text-[10px]">(Terkunci)</span></div>`;
+          htmlMenengah += `<div class="lesson-item lesson-locked flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title}</div>`;
         }
       });
       document.getElementById('submenu-menengah').innerHTML = htmlMenengah;
 
+      // Kelas Lanjutan
       let htmlLanjutan = '';
       const hasLanjutan = owned.includes("Lanjutan");
       materi.lanjutan.forEach(item => {
         if (hasLanjutan) {
-          htmlLanjutan += `<div onclick="playVideo(${item.id})" class="lesson-item cursor-pointer rounded-xl text-slate-300">${item.title}</div>`;
+          htmlLanjutan += `<div onclick="playVideo(${item.id})" class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-play text-xs"></i> ${item.title}</div>`;
         } else {
-          htmlLanjutan += `<div class="lesson-item rounded-xl text-slate-500 flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title} <span class="text-[10px]">(Terkunci)</span></div>`;
+          htmlLanjutan += `<div class="lesson-item lesson-locked flex items-center gap-2"><i class="fas fa-lock"></i> ${item.title}</div>`;
         }
       });
       document.getElementById('submenu-lanjutan').innerHTML = htmlLanjutan;
 
-      let htmlModul = `
-        <div class="lesson-item cursor-pointer rounded-xl text-slate-400 hover:text-white">• Modul PDF Dasar.pdf</div>
-        <div class="lesson-item cursor-pointer rounded-xl text-slate-400 hover:text-white">• Modul PDF Menengah.pdf</div>
-        <div class="lesson-item cursor-pointer rounded-xl text-slate-400 hover:text-white">• Latihan Soal EPS-TOPIK.pdf</div>
-        <div class="lesson-item cursor-pointer rounded-xl text-slate-400 hover:text-white">• Kosakata Harian.pdf</div>
+      // Module Latihan
+      document.getElementById('submenu-latihan').innerHTML = `
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-pencil-alt"></i> Latihan Hangul</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-pencil-alt"></i> Latihan Kosakata</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-pencil-alt"></i> Latihan Tata Bahasa</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-pencil-alt"></i> Quiz EPS-TOPIK</div>
       `;
-      document.getElementById('submenu-modul').innerHTML = htmlModul;
+
+      // Module Listening
+      document.getElementById('submenu-listening').innerHTML = `
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-headphones"></i> Listening Dasar</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-headphones"></i> Percakapan Sehari-hari</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-headphones"></i> Listening EPS-TOPIK</div>
+      `;
+
+      // Module Pendukung
+      document.getElementById('submenu-pendukung').innerHTML = `
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-file-alt"></i> Kosakata Harian</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-file-alt"></i> Pola Kalimat Penting</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-file-alt"></i> Tips Belajar Cepat</div>
+        <div class="lesson-item lesson-unlocked cursor-pointer flex items-center gap-2"><i class="fas fa-file-alt"></i> Catatan Budaya Korea</div>
+      `;
     }
 
     function playVideo(id) {
-      let video = null;
-      Object.values(materi).forEach(level => {
-        const found = level.find(v => v.id === id);
-        if (found) video = found;
-      });
-
-      if (video) {
-        document.getElementById('content-dashboard').classList.add('hidden');
-        document.getElementById('content-video').classList.remove('hidden');
-        document.getElementById('videoPlayer').src = video.url;
-      }
+      document.getElementById('content-dashboard').classList.add('hidden');
+      document.getElementById('content-video').classList.remove('hidden');
+      document.getElementById('videoPlayer').src = videoSample;
     }
 
     function kembaliDashboard() {
@@ -327,10 +334,6 @@
         ? `Halo Admin Gumi, saya mau konsultasi. Nama saya ${currentUser.name}.` 
         : `Halo Admin Gumi, saya ingin Upgrade Kelas. Nama saya ${currentUser.name}. Paket saat ini: ${currentUser.owned.join(" & ")}`;
       window.open(`https://wa.me/628385551800?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
     }
 
     function logout() {

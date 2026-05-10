@@ -41,7 +41,7 @@
       color: #94A3B8 !important;
       text-decoration: line-through;
     }
-    .watched i.fa-play-circle, .watched i.fa-file-pdf, .watched i.fa-headphones {
+    .watched i {
       color: #CBD5E1 !important;
     }
 
@@ -83,38 +83,43 @@
 
         <nav class="space-y-0.5">
           <button onclick="showDashboard()" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-left rounded-modern hover:bg-slate-800 transition-colors">
-            <i class="fas fa-th-large"></i> Dashboard
+            <i class="fas fa-info-circle text-sky-400"></i> Dashboard
           </button>
 
+          <div class="my-2 border-t border-white/5"></div>
+
           <button onclick="showClassSection('dasar')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-graduation-cap"></i> Kelas Dasar
+            <i class="fas fa-book-reader text-emerald-500"></i> Kelas Dasar
           </button>
           <button onclick="showClassSection('menengah')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-award"></i> Kelas Menengah
+            <i class="fas fa-book-reader text-orange-500"></i> Kelas Menengah
           </button>
           <button onclick="showClassSection('lanjutan')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-star"></i> Kelas Lanjutan
+            <i class="fas fa-book-reader text-blue-500"></i> Kelas Lanjutan
           </button>
 
           <div class="my-2 border-t border-white/5"></div>
 
           <button onclick="showModuleSection('materi')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-pencil-alt"></i> Module Materi
+            <i class="fas fa-book-reader text-blue-400"></i> Module Materi
           </button>
           <button onclick="showModuleSection('listening')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-headphones"></i> Module Listening
+            <i class="fas fa-book-reader text-purple-400"></i> Module Listening
           </button>
           <button onclick="showModuleSection('soal')" class="w-full flex items-center gap-4 px-5 py-3.5 font-semibold uppercase text-slate-300 hover:text-white text-left">
-            <i class="fas fa-tools"></i> Module Soal
+            <i class="fas fa-book-reader text-rose-400"></i> Module Soal
           </button>
 
           <div class="pt-6 border-t border-white/10 mt-6 space-y-1">
             <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white">
-              <i class="fas fa-comments"></i> Konsultasi Admin
+              <i class="fas fa-info-circle"></i> Konsultasi Admin
             </button>
             <button onclick="contactWA('upgrade')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white">
-              <i class="fas fa-arrow-circle-up"></i> Upgrade Kelas
+              <i class="fas fa-info-circle"></i> Upgrade Kelas
             </button>
+            <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-blue-400 hover:text-white transition-colors">
+              <i class="fas fa-info-circle"></i> Info GToG Korea
+            </a>
           </div>
         </nav>
       </div>
@@ -157,7 +162,7 @@
     const classData = {
       dasar: { 
         title: "Kelas Dasar", 
-        icon: "fas fa-graduation-cap text-emerald-600", 
+        icon: "fas fa-book-reader text-emerald-500", 
         items: [
           "Pengenalan Huruf Korea", "Vokal Dasar", "Konsonan Dasar", "Vokal Rangkap", 
           "Konsonan Rangkap", "Penggabungan Huruf", "Aturan Pelafalan", 
@@ -167,7 +172,7 @@
       },
       menengah: { 
         title: "Kelas Menengah", 
-        icon: "fas fa-award text-orange-600", 
+        icon: "fas fa-book-reader text-orange-500", 
         items: [
           "Kalimat Pernyataan Formal", "Kalimat Pertanyaan Formal", "Kalimat Ajakan", 
           "Kalimat Perintah", "Kalimat Informal", "Kalimat Negatif", 
@@ -177,7 +182,7 @@
       },
       lanjutan: { 
         title: "Kelas Lanjutan", 
-        icon: "fas fa-star text-blue-600", 
+        icon: "fas fa-book-reader text-blue-500", 
         items: [
           "Akhiran Bisa / Tidak Bisa", "Akhiran Pernah / Tidak Pernah", 
           "Akhiran Boleh / Tidak Boleh", "Akhiran Harus", "Akhiran Penawaran", 
@@ -190,7 +195,7 @@
     const moduleData = {
       materi: { 
         title: "Module Materi", 
-        icon: "fas fa-pencil-alt text-blue-600", 
+        icon: "fas fa-book-reader text-blue-400", 
         files: [
           "Textbook HRDK 2024 Bab 1 - 30", "Textbook HRDK 2024 Bab 31 - 60",
           "Textbook HRDK 2015 Bab 1 - 30", "Textbook HRDK 2015 Bab 31 - 60",
@@ -203,7 +208,7 @@
       },
       listening: { 
         title: "Module Listening", 
-        icon: "fas fa-headphones text-purple-600", 
+        icon: "fas fa-book-reader text-purple-400", 
         files: [
           "Audio Listening Textbook HRDK 2024 Bab 1 - 30",
           "Audio Listening Textbook HRDK 2024 Bab 31 - 60",
@@ -211,7 +216,7 @@
           "Visual Listening 4", "Visual Listening 5"
         ] 
       },
-      soal: { title: "Module Soal", icon: "fas fa-tools text-rose-600", files: ["Simulasi TOPIK 1", "Tryout Akbar Sukabumi"] }
+      soal: { title: "Module Soal", icon: "fas fa-book-reader text-rose-400", files: ["Simulasi TOPIK 1", "Tryout Akbar Sukabumi"] }
     };
 
     const videoUrl = "https://drive.google.com/file/d/1KspUnWD-wzu4L9LiCMYf7--ksIvMPwl9/preview";
@@ -248,7 +253,7 @@
               <span class="font-semibold title-text text-sm">${item}</span>
             </div>
             <span class="text-[10px] font-bold ${!hasAccess ? 'text-slate-400' : (isWatched ? 'text-slate-400' : 'text-emerald-600 bg-emerald-100')} px-2 py-1 rounded uppercase">
-              ${!hasAccess ? 'Terkunci' : (isWatched ? 'Sudah Ditonton' : 'Mulai')}
+              ${!hasAccess ? 'Terkunci' : (isWatched ? 'Selesai' : 'Buka')}
             </span>
           </div>`;
       });
@@ -266,11 +271,10 @@
       data.files.forEach((file, index) => {
         const key = `doc_${type}_${index}`;
         const isWatched = watchedItems.includes(key);
-        const icon = type === 'listening' ? 'fa-headphones text-purple-500' : 'fa-file-pdf text-rose-500';
         html += `
           <div class="list-row ${isWatched ? 'watched' : ''}">
             <div class="flex items-center gap-3">
-              <i class="fas ${icon}"></i>
+              <i class="fas fa-file-alt text-slate-500"></i>
               <span class="font-semibold title-text text-sm">${file}</span>
             </div>
             <a href="${pdfUrl}" target="_blank" onclick="markWatched('${key}')" class="text-[10px] font-black text-[#8D7B68] bg-[#D6C7AE]/40 px-3 py-1.5 rounded-lg">BUKA</a>

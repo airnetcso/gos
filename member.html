@@ -41,14 +41,41 @@
       color: #94A3B8 !important;
       text-decoration: line-through;
     }
-    .watched i {
-      color: #CBD5E1 !important;
-    }
+    .watched i { color: #CBD5E1 !important; }
 
     .video-container {
       background: black;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
     }
+
+    .avatar-container {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+    }
+    .avatar-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #F5EFE6;
+      background-color: #F5EFE6;
+    }
+    .avatar-edit-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+      color: white;
+      font-size: 10px;
+    }
+    .avatar-container:hover .avatar-edit-overlay { opacity: 1; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #F5EFE6; }
@@ -57,9 +84,12 @@
 </head>
 <body>
 
+  <input type="file" id="avatarInput" accept="image/*" class="hidden" onchange="updateAvatar(event)">
+
   <div id="loginScreen" class="min-h-screen flex items-center justify-center bg-[#1E293B] p-6">
     <div class="max-w-md w-full bg-white rounded-modern shadow-2xl p-10 text-center border-b-8 border-[#AE944F]">
-      <div class="w-20 h-20 mx-auto bg-[#1E293B] rounded-2xl flex items-center justify-center text-white text-4xl font-black mb-8">가</div>
+      <img src="https://github.com/airnetcso/gos/blob/main/LOGO_HITAM_PUTIH-removebg-preview.png?raw=true" 
+           alt="Gumi Logo" class="w-24 h-24 mx-auto mb-6 object-contain">
       <h1 class="text-3xl font-bold text-slate-900 tracking-tighter">Member Area</h1>
       <p class="text-slate-500 font-semibold text-sm mt-2">Gumi Eohakwon Sukabumi</p>
       
@@ -74,9 +104,12 @@
     <aside id="sidebar" class="bg-[#1E293B] text-white fixed h-full z-50 overflow-y-auto">
       <div class="p-6">
         <div class="flex items-center gap-3 mb-10">
-          <div class="w-10 h-10 bg-[#F5EFE6] rounded-xl flex items-center justify-center text-slate-900 text-2xl font-black">가</div>
+          <div class="avatar-container" onclick="document.getElementById('avatarInput').click()">
+            <img id="userAvatar" src="https://ui-avatars.com/api/?name=User&background=D6C7AE&color=1E293B" class="avatar-image" alt="User">
+            <div class="avatar-edit-overlay"><i class="fas fa-camera"></i></div>
+          </div>
           <div class="leading-tight">
-            <span class="font-bold text-lg tracking-tight">구미어학원</span>
+            <span id="displayUserName" class="font-bold text-lg tracking-tight text-white">Member</span>
             <p class="text-[#D6C7AE] text-[10px] font-bold uppercase">Premium Member</p>
           </div>
         </div>
@@ -111,10 +144,10 @@
           </button>
 
           <div class="pt-6 border-t border-white/10 mt-6 space-y-1">
-            <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white">
+            <button onclick="contactWA('konsultasi')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white transition-all">
               <i class="fas fa-info-circle"></i> Konsultasi Admin
             </button>
-            <button onclick="contactWA('upgrade')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white">
+            <button onclick="contactWA('upgrade')" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-[#D6C7AE] hover:text-white transition-all">
               <i class="fas fa-info-circle"></i> Upgrade Kelas
             </button>
             <a href="https://kp2mi.go.id/gtog-korea/pengumuman" target="_blank" class="w-full flex items-center gap-4 px-5 py-3 font-semibold uppercase text-blue-400 hover:text-white transition-colors">
@@ -128,9 +161,12 @@
 
     <main class="flex-1 ml-[280px] p-6 md:p-12">
       <div id="content-main">
-        <div id="dashboard-info" class="p-8 bg-[#FDFBF9] border-l-4 border-[#D6C7AE] rounded-r-xl shadow-sm text-center">
-           <h3 class="font-bold text-slate-800 mb-2 italic text-2xl">Annyeonghaseyo!</h3>
-           <p class="text-slate-600 leading-relaxed text-lg">Silahkan pilih menu di sidebar untuk mulai belajar.</p>
+        <div id="dashboard-info" class="p-10 bg-white border-l-8 border-[#AE944F] rounded-r-2xl shadow-sm text-center">
+           <p id="koreanQuote" class="font-bold text-slate-800 mb-4 text-3xl leading-snug"></p>
+           <p id="indoQuote" class="text-[#8D7B68] italic text-xl font-medium"></p>
+           <div class="mt-8 pt-6 border-t border-slate-100">
+             <p class="text-slate-400 text-sm font-bold uppercase tracking-widest">Silahkan pilih materi di sidebar untuk mulai belajar</p>
+           </div>
         </div>
 
         <div id="list-container" class="hidden">
@@ -154,6 +190,10 @@
   </div>
 
   <script>
+    // --- KONFIGURASI QUOTES (GANTI DISINI) ---
+    const koreanQuoteText = "오늘 걷지 않으면 내일 뛰어야 한다.";
+    const indoQuoteText = '"Jika kamu tidak berjalan hari ini, kamu harus berlari besok."';
+
     const accessDatabase = {
       "AWEWE21": { name: "Asep", owned: ["Dasar"] },
       "AMIRA22": { name: "Amira", owned: ["Dasar", "Menengah", "Lanjutan"] }
@@ -164,30 +204,31 @@
         title: "Kelas Dasar", 
         icon: "fas fa-book-reader text-emerald-500", 
         items: [
-          "Pengenalan Huruf Korea", "Vokal Dasar", "Konsonan Dasar", "Vokal Rangkap", 
-          "Konsonan Rangkap", "Penggabungan Huruf", "Aturan Pelafalan", 
-          "Chagi Soge", "Kalimat Kopula", "Kalimat Preposisi", 
-          "Bilangan Sino", "Bilangan Asli", "Pembentukan Kalimat"
+          "1. Pengenalan Huruf Korea", "2. Vokal Dasar", "3. Konsonan Dasar", 
+          "4. Vokal Rangkap", "5. Konsonan Rangkap", "6. Penggabungan Huruf", 
+          "7. Aturan Pelafalan", "8. Chagi Soge", "9. Kalimat Kopula", 
+          "10. Kalimat Preposisi", "11. Bilangan Sino", "12. Bilangan Asli", 
+          "13. Pembentukan Kalimat"
         ] 
       },
       menengah: { 
         title: "Kelas Menengah", 
         icon: "fas fa-book-reader text-orange-500", 
         items: [
-          "Kalimat Pernyataan Formal", "Kalimat Pertanyaan Formal", "Kalimat Ajakan", 
-          "Kalimat Perintah", "Kalimat Informal", "Kalimat Negatif", 
-          "Kalimat Larangan", "Kalimat Tenses Sedang", "Kalimat Tenses Ingin", 
-          "Kalimat Tenses Akan", "Kalimat Tenses Lampau"
+          "1. Kalimat Pernyataan Formal", "2. Kalimat Pertanyaan Formal", 
+          "3. Kalimat Ajakan", "4. Kalimat Perintah", "5. Kalimat Informal", 
+          "6. Kalimat Negatif", "7. Kalimat Larangan", "8. Kalimat Tenses Sedang", 
+          "9. Kalimat Tenses Ingin", "10. Kalimat Tenses Akan", "11. Kalimat Tenses Lampau"
         ] 
       },
       lanjutan: { 
         title: "Kelas Lanjutan", 
         icon: "fas fa-book-reader text-blue-500", 
         items: [
-          "Akhiran Bisa / Tidak Bisa", "Akhiran Pernah / Tidak Pernah", 
-          "Akhiran Boleh / Tidak Boleh", "Akhiran Harus", "Akhiran Penawaran", 
-          "Akhiran Akan 2", "Kata Sambung Dan, Dengan", 
-          "Kata Sambung Dan, Kemudian", "Kata Sambung Kalau, Jika"
+          "1. Akhiran Bisa / Tidak Bisa", "2. Akhiran Pernah / Tidak Pernah", 
+          "3. Akhiran Boleh / Tidak Boleh", "4. Akhiran Harus", "5. Akhiran Penawaran", 
+          "6. Akhiran Akan 2", "7. Kata Sambung Dan, Dengan", 
+          "8. Kata Sambung Dan, Kemudian", "9. Kata Sambung Kalau, Jika"
         ] 
       }
     };
@@ -226,6 +267,23 @@
     let currentCategory = null;
     let watchedItems = JSON.parse(localStorage.getItem('gumi_history')) || [];
 
+    // Tampilkan Quotes saat halaman dimuat
+    document.getElementById('koreanQuote').innerText = koreanQuoteText;
+    document.getElementById('indoQuote').innerText = indoQuoteText;
+
+    function updateAvatar(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Image = e.target.result;
+          document.getElementById('userAvatar').src = base64Image;
+          localStorage.setItem('gumi_avatar', base64Image);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
     function checkAccess() {
       const code = document.getElementById('accessCode').value.trim().toUpperCase();
       const user = accessDatabase[code];
@@ -233,7 +291,27 @@
         currentUser = user;
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('memberContent').classList.remove('hidden');
+        document.getElementById('displayUserName').innerText = user.name;
+        
+        const savedAvatar = localStorage.getItem('gumi_avatar');
+        if (savedAvatar) {
+          document.getElementById('userAvatar').src = savedAvatar;
+        } else {
+          document.getElementById('userAvatar').src = `https://ui-avatars.com/api/?name=${user.name}&background=D6C7AE&color=1E293B`;
+        }
       } else { alert("KODE AKSES SALAH!"); }
+    }
+
+    function contactWA(type) {
+      const phoneNumber = "628385551800";
+      let message = "";
+      if (type === 'upgrade') {
+        message = "Halo Admin Gumi Eohakwon, saya ingin melakukan upgrade paket kelas belajar saya.";
+      } else if (type === 'konsultasi') {
+        message = "Halo Admin Gumi Eohakwon, saya ingin berkonsultasi mengenai pembelajaran bahasa Korea.";
+      }
+      const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(waLink, '_blank');
     }
 
     function showClassSection(type) {
@@ -303,7 +381,10 @@
       document.getElementById('videoPlayer').src = "";
       document.getElementById('content-video').classList.add('hidden');
       document.getElementById('content-main').classList.remove('hidden');
-      if (currentCategory) showClassSection(currentCategory);
+      if (currentCategory) {
+        if (classData[currentCategory]) showClassSection(currentCategory);
+        else showModuleSection(currentCategory);
+      }
     }
 
     function showDashboard() {
